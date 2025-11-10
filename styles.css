@@ -69,6 +69,13 @@ nav ul li a {
     padding: 5px 10px;
 }
 
+/* Style for the active link in the navigation */
+.active-link {
+    border-bottom: 2px solid var(--gradient-end);
+    padding-bottom: 3px;
+    color: var(--gradient-end) !important;
+}
+
 /* Dropdown Styles */
 .dropdown {
     position: relative;
@@ -250,4 +257,108 @@ footer {
     padding: 20px 5%;
     border-top: 1px solid var(--accent-blue);
     font-size: 0.9em;
+}
+
+/* --- About Us Page (page1.html) Styles --- */
+
+.about-us-section {
+    padding: 60px 5%;
+    min-height: 80vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.main-heading {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mission-statement {
+    font-size: 1.1em;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+}
+
+.mission-statement p {
+    color: var(--text-light);
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: var(--accent-blue);
+    margin: 40px 0;
+    opacity: 0.5;
+}
+
+.founders-profiles {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.founder-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 45%; /* Takes up slightly less than half the container width */
+    min-width: 300px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(50, 94, 171, 0.7);
+}
+
+.profile-pic {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%; /* Making them perfectly circular */
+    margin-bottom: 15px;
+    border: 5px solid var(--gradient-end);
+    transition: transform 0.3s ease;
+}
+
+.founder-card:hover .profile-pic {
+    transform: scale(1.05);
+}
+
+.founder-card h3 {
+    color: var(--gradient-end);
+    margin-bottom: 5px;
+}
+
+.founder-card .role {
+    color: var(--accent-blue);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.founder-card .bio {
+    text-align: left;
+    font-size: 0.95em;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    .founders-profiles {
+        flex-direction: column;
+        align-items: center;
+    }
+    .founder-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
