@@ -1,0 +1,253 @@
+/* Custom Properties for Colors */
+:root {
+    --bg-dark: #1e2832; /* Very faint blue shade (mostly on the black side) */
+    --accent-blue: #325eab; /* Darker accent */
+    --gradient-start: #3373f5;
+    --gradient-end: #4e9efe;
+    --text-light: #f0f8ff; /* Near white for readability */
+    --card-bg: #2b3945; /* Slightly lighter dark for card background */
+    --border-color: rgba(78, 158, 254, 0.5);
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--gradient-end);
+}
+
+/* --- Header and Navigation --- */
+header {
+    background-color: var(--bg-dark);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent-blue);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h1 {
+    /* Apply the blue-white gradient to the logo text */
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end), var(--text-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.8em;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-dark);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 1;
+    border-radius: 5px;
+    border: 1px solid var(--accent-blue);
+    top: 35px; /* Adjust based on menu size */
+}
+
+.dropdown-content a {
+    color: var(--text-light);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: normal;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--accent-blue);
+    color: var(--text-light);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropbtn i {
+    margin-left: 5px;
+}
+
+/* --- Hero Section (Video) --- */
+.hero-section {
+    position: relative;
+    height: 70vh; /* Adjust height as needed */
+    width: 100%;
+    overflow: hidden;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dark overlay to ensure text visibility */
+    background-color: rgba(0, 0, 0, 0.4); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-overlay h2 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    /* Apply the blue-white gradient to the main headline */
+    background: linear-gradient(45deg, var(--text-light), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    color: var(--bg-dark);
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(51, 115, 245, 0.5);
+    color: var(--bg-dark); /* Keep color dark on hover */
+}
+
+
+/* --- Product Gallery Section --- */
+.product-gallery {
+    padding: 50px 5%;
+    text-align: center;
+}
+
+.product-gallery h3 {
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: var(--gradient-end);
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.product-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(78, 158, 254, 0.3);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.product-card h4 {
+    color: var(--gradient-end);
+    margin-bottom: 10px;
+}
+
+.product-card p {
+    color: var(--text-light);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.see-more {
+    padding: 10px 20px;
+    background-color: var(--accent-blue);
+    color: var(--text-light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.see-more:hover {
+    background-color: var(--gradient-start);
+}
+
+
+/* --- Footer --- */
+footer {
+    background-color: #11181f; /* Even darker shade for footer */
+    text-align: center;
+    padding: 20px 5%;
+    border-top: 1px solid var(--accent-blue);
+    font-size: 0.9em;
+}
