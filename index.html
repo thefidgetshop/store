@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fidget Shop - Your Destination for Fidgets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>The Fidget Shop</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Our Products <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Large</a>
+                        <a href="#">Small</a>
+                        <a href="#">Squishy</a>
+                        <a href="#">Quiet</a>
+                        <a href="#">Spinners</a>
+                        <a href="#">Cubes</a>
+                    </div>
+                </li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="hero-section">
+        <div class="video-container">
+            <video autoplay muted loop playsinline poster="fidget_video_placeholder.jpg">
+                <source src="fidget_showcase.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay">
+                <h2>Find Your Focus. Find Your Fidget.</h2>
+                <a href="#gallery" class="cta-button">Explore Products</a>
+            </div>
+        </div>
+    </main>
+
+    <section id="gallery" class="product-gallery">
+        <h3>Explore Our Collection</h3>
+        <div class="card-container">
+            <div class="product-card">
+                <img src="fidget_placeholder_1.jpg" alt="A quiet fidget toy">
+                <h4>The Silent Slider</h4>
+                <p>Perfect for meetings and classrooms. Virtually noiseless.</p>
+                <button class="see-more">See More</button>
+            </div>
+
+            <div class="product-card">
+                <img src="fidget_placeholder_2.jpg" alt="A large squishy stress ball">
+                <h4>Mega Squish Ball</h4>
+                <p>Relieve serious stress with this oversized, soft fidget.</p>
+                <button class="see-more">See More</button>
+            </div>
+
+            <div class="product-card">
+                <img src="fidget_placeholder_3.jpg" alt="A colorful geometric spinner">
+                <h4>Nebula Spinner</h4>
+                <p>A classic with a premium, mesmerizing spin.</p>
+                <button class="see-more">See More</button>
+            </div>
+
+            <div class="product-card">
+                <img src="fidget_placeholder_4.jpg" alt="A small pocket-sized clicker">
+                <h4>Pocket Clicker</h4>
+                <p>Keep your hands busy anywhere with this compact device.</p>
+                <button class="see-more">See More</button>
+            </div>
+
+            </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
