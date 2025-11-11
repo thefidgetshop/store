@@ -1,4 +1,4 @@
-/* Import Google Font for a modern look (e.g., Inter) */
+/* Import Google Font for a modern look (e.g., Inter) - **THIS LINE IS NOW CORRECT** */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* Custom Properties for Colors */
@@ -65,7 +65,7 @@ header {
     -webkit-text-fill-color: transparent;
     font-size: 1.8em;
     font-weight: 700;
-    text-transform: uppercase; /* Keeping the caps you added later for consistency */
+    text-transform: uppercase; 
     letter-spacing: 1px;
 }
 
@@ -91,7 +91,7 @@ nav ul li {
 nav ul li a {
     font-weight: 500; 
     padding: 8px 10px;
-    text-transform: uppercase; /* Keeping the caps you added later for consistency */
+    text-transform: uppercase; 
     letter-spacing: 0.5px;
     font-size: 0.95em;
     color: var(--text-light); 
@@ -151,7 +151,7 @@ nav ul li a:hover {
     font-size: 5em;
     margin-bottom: 10px;
     font-weight: 700; 
-    text-transform: uppercase; /* Keeping the caps you added later for consistency */
+    text-transform: uppercase; 
     letter-spacing: 3px;
     background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start)); 
     -webkit-background-clip: text;
@@ -189,7 +189,6 @@ nav ul li a:hover {
 
 /* --- Product Gallery Section (OLD/Original Layout) --- */
 .product-gallery {
-    /* RESTORED: This padding was likely the source of the overlap issue */
     padding: 60px 5%; 
     text-align: center;
     background-color: var(--bg-dark);
@@ -206,25 +205,23 @@ nav ul li a:hover {
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px; /* Reduced gap */
+    gap: 30px; 
     justify-content: center;
 }
 
 .product-card {
     background-color: var(--card-bg);
-    /* Removed border fix */
     border: none; 
-    border-radius: 8px; /* Slightly smaller radius */
+    border-radius: 8px; 
     overflow: hidden;
-    width: 300px; /* Slightly smaller width */
+    width: 300px; 
     padding: 20px;
-    /* Removed strong shadow fix */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-5px); /* Slightly smaller hover lift */
+    transform: translateY(-5px); 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
     border-color: transparent; 
 }
@@ -232,10 +229,10 @@ nav ul li a:hover {
 .product-card img {
     width: 100%;
     height: auto;
-    max-height: 180px; /* Reduced max height */
+    max-height: 180px; 
     object-fit: cover;
     border-radius: 6px; 
-    margin-bottom: 15px; /* Reduced margin */
+    margin-bottom: 15px; 
     opacity: 1; 
     transition: opacity 0.3s ease;
 }
@@ -247,7 +244,7 @@ nav ul li a:hover {
 .product-card h4 {
     color: var(--gradient-end); 
     margin-bottom: 6px;
-    font-size: 1.3em; /* Reduced font size */
+    font-size: 1.3em; 
     font-weight: 600;
     letter-spacing: 0.5px;
 }
@@ -259,7 +256,7 @@ nav ul li a:hover {
 }
 
 .see-more {
-    padding: 8px 20px; /* Reduced padding */
+    padding: 8px 20px; 
     background: transparent; 
     color: var(--gradient-end); 
     border: 1px solid var(--gradient-end); 
@@ -267,7 +264,7 @@ nav ul li a:hover {
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    font-size: 0.9em; /* Reduced font size */
+    font-size: 0.9em; 
 }
 
 .see-more:hover {
