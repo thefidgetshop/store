@@ -1,12 +1,17 @@
+/* Import Google Font for a modern look (e.g., Inter) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* Custom Properties for Colors */
 :root {
-    --bg-dark: #1e2832; /* Very faint blue shade (mostly on the black side) */
+    --bg-dark: #101010; /* Much darker background for moonlight effect */
     --accent-blue: #325eab; /* Darker accent */
     --gradient-start: #3373f5;
-    --gradient-end: #67acff; /* CHANGED: Lighter blue for gradient end */
-    --text-light: #f0f8ff; /* Near white for readability */
-    --card-bg: #2b3945; /* Slightly lighter dark for card background */
-    --border-color: rgba(103, 172, 255, 0.5); /* Updated border to match new gradient end */
+    --gradient-end: #67acff; /* Lighter blue for gradient end */
+    --text-light: #e0e0e0; /* Slightly off-white for main text */
+    --text-subtle: #888888; /* For less prominent text */
+    --card-bg: #1a1a1a; /* Darker card background */
+    --border-color: rgba(103, 172, 255, 0.3); /* Subtler border */
+    --header-bg: rgba(0,0,0,0.5); /* Transparent header */
 }
 
 /* Base Styles */
@@ -17,110 +22,101 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-light);
     line-height: 1.6;
     scroll-behavior: smooth;
+    /* Spotlight effect on background */
+    background: radial-gradient(circle at 50% 200px, rgba(50, 94, 171, 0.1) 0%, rgba(16,16,16,1) 70%);
 }
 
 a {
     color: var(--text-light);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 a:hover {
     color: var(--gradient-end);
+    transform: translateY(-1px);
 }
 
 /* --- Header and Navigation --- */
 header {
-    background-color: var(--bg-dark);
-    padding: 15px 5%;
+    background-color: var(--header-bg); 
+    padding: 20px 5%; 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Keeps logo left */
     align-items: center;
-    border-bottom: 2px solid var(--accent-blue);
+    border-bottom: none; 
     position: sticky;
     top: 0;
     z-index: 1000;
+    backdrop-filter: blur(5px); 
+    height: 120px; /* Provides space for the centered nav */
 }
 
 .logo h1 {
-    /* Apply the blue-light blue gradient to the logo text */
-    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); /* Removed --text-light */
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Container for Centering the Nav */
+.nav-container {
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px; /* Vertically position the floating bar */
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    /* Floating Menu Box Style */
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 5px; 
+    padding: 8px 10px; 
 }
 
 nav ul li {
-    margin-left: 25px;
+    margin: 0 15px; 
 }
 
 nav ul li a {
-    font-weight: bold;
-    padding: 5px 10px;
+    font-weight: 500; 
+    padding: 8px 10px;
+    letter-spacing: 0.5px;
+    font-size: 0.95em;
+    color: var(--text-light); 
 }
 
-/* Style for the active link in the navigation */
+nav ul li a:hover {
+    color: var(--gradient-end);
+    transform: none; 
+}
+
 .active-link {
-    border-bottom: 2px solid var(--gradient-end);
-    padding-bottom: 3px;
     color: var(--gradient-end) !important;
+    font-weight: 600 !important;
 }
 
-/* Dropdown Styles */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: var(--bg-dark);
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
-    z-index: 1;
-    border-radius: 5px;
-    border: 1px solid var(--accent-blue);
-    top: 35px; /* Adjust based on menu size */
-}
-
-.dropdown-content a {
-    color: var(--text-light);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-weight: normal;
-}
-
-.dropdown-content a:hover {
-    background-color: var(--accent-blue);
-    color: var(--text-light);
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropbtn i {
-    margin-left: 5px;
-}
-
-/* --- Hero Section (Video) --- */
+/* --- Hero Section (Spotlight) --- */
 .hero-section {
     position: relative;
-    height: 70vh; /* Adjust height as needed */
+    height: 90vh; 
     width: 100%;
     overflow: hidden;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Main Spotlight effect */
+    background: radial-gradient(circle at center, rgba(103, 172, 255, 0.15) 0%, rgba(16,16,16,0.5) 40%, rgba(16,16,16,1) 70%);
 }
 
 .video-container {
@@ -129,6 +125,8 @@ nav ul li a {
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: -1; 
+    opacity: 0.2; 
 }
 
 .video-container video {
@@ -138,83 +136,91 @@ nav ul li a {
 }
 
 .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Dark overlay to ensure text visibility */
-    background-color: rgba(0, 0, 0, 0.4); 
+    position: relative; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    padding: 20px;
+    max-width: 800px;
+    color: var(--text-light);
 }
 
 .hero-overlay h2 {
-    font-size: 3em;
-    margin-bottom: 20px;
-    /* CHANGED: Apply the blue-light blue gradient to the main headline */
+    font-size: 4em; 
+    margin-bottom: 10px;
+    font-weight: 700; 
+    letter-spacing: 2px;
     background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start)); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+.hero-overlay p {
+    font-size: 1.2em;
+    font-weight: 300;
+    color: var(--text-subtle);
+    margin-bottom: 30px;
+}
+
 .cta-button {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 14px 40px; 
     background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    color: var(--bg-dark);
-    font-weight: bold;
-    border-radius: 5px;
+    color: var(--bg-dark); 
+    font-weight: 600; 
+    border-radius: 50px; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 1.1em;
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    /* Updated box-shadow to match new gradient */
-    box-shadow: 0 5px 15px rgba(103, 172, 255, 0.5); 
-    color: var(--bg-dark); /* Keep color dark on hover */
+    transform: translateY(-3px); 
+    box-shadow: 0 8px 25px rgba(103, 172, 255, 0.6); 
+    color: var(--bg-dark);
 }
 
 
 /* --- Product Gallery Section --- */
 .product-gallery {
-    padding: 50px 5%;
+    padding: 80px 5%;
     text-align: center;
+    background-color: var(--bg-dark);
 }
 
 .product-gallery h3 {
-    font-size: 2em;
-    margin-bottom: 40px;
-    color: var(--gradient-end);
+    font-size: 2.8em; 
+    margin-bottom: 60px;
+    color: var(--text-light); 
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px; 
     justify-content: center;
 }
 
 .product-card {
     background-color: var(--card-bg);
-    /* CHANGED: Updated border color to new gradient end */
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 12px;
     overflow: hidden;
-    width: 300px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 320px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    /* CHANGED: Updated box-shadow to new gradient end */
-    box-shadow: 0 8px 20px rgba(103, 172, 255, 0.3);
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 30px rgba(103, 172, 255, 0.2); 
+    border-color: var(--gradient-start); 
 }
 
 .product-card img {
@@ -222,51 +228,65 @@ nav ul li a {
     height: auto;
     max-height: 200px;
     object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    border-radius: 8px; 
+    margin-bottom: 20px;
+    opacity: 0.8; 
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover img {
+    opacity: 1; 
 }
 
 .product-card h4 {
-    color: var(--gradient-end);
-    margin-bottom: 10px;
+    color: var(--gradient-end); 
+    margin-bottom: 8px;
+    font-size: 1.4em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .product-card p {
-    color: var(--text-light);
+    color: var(--text-subtle); 
     font-size: 0.9em;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .see-more {
-    padding: 10px 20px;
-    background-color: var(--accent-blue);
-    color: var(--text-light);
-    border: none;
-    border-radius: 5px;
+    padding: 10px 25px;
+    background: transparent; 
+    color: var(--gradient-end); 
+    border: 1px solid var(--gradient-end); 
+    border-radius: 50px; 
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-size: 0.95em;
 }
 
 .see-more:hover {
-    background-color: var(--gradient-start);
+    background-color: var(--gradient-start); 
+    color: var(--bg-dark); 
+    border-color: var(--gradient-start);
 }
 
 
 /* --- Footer --- */
 footer {
-    background-color: #11181f; /* Even darker shade for footer */
+    background-color: #0b0b0b; 
     text-align: center;
-    padding: 20px 5%;
-    border-top: 1px solid var(--accent-blue);
-    font-size: 0.9em;
+    padding: 30px 5%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); 
+    font-size: 0.85em;
+    color: var(--text-subtle);
 }
 
 /* --- About Us Page (page1.html) Styles --- */
 
 .about-us-section {
-    padding: 60px 5%;
+    padding: 80px 5%;
     min-height: 80vh;
+    background: radial-gradient(circle at 50% 10%, rgba(103, 172, 255, 0.1) 0%, rgba(16,16,16,1) 50%); 
 }
 
 .container {
@@ -276,89 +296,131 @@ footer {
 
 .main-heading {
     text-align: center;
-    font-size: 2.5em;
-    margin-bottom: 40px;
-    /* CHANGED: Gradient updated */
+    font-size: 3em;
+    margin-bottom: 50px;
     background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    letter-spacing: 1.5px;
 }
 
 .mission-statement {
     font-size: 1.1em;
     text-align: center;
     max-width: 800px;
-    margin: 0 auto 50px auto;
-    padding: 20px;
-    border-radius: 8px;
-    /* CHANGED: Border color updated */
-    border: 1px solid var(--border-color);
+    margin: 0 auto 60px auto;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1); 
     background-color: var(--card-bg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .mission-statement p {
     color: var(--text-light);
+    font-weight: 300;
 }
 
 .divider {
     border: none;
     height: 1px;
-    background-color: var(--accent-blue);
-    margin: 40px 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 50px 0;
     opacity: 0.5;
 }
 
 .founders-profiles {
     display: flex;
-    justify-content: space-around;
-    gap: 30px;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    justify-content: center; 
+    gap: 40px;
+    flex-wrap: wrap; 
 }
 
 .founder-card {
     background-color: var(--card-bg);
-    padding: 30px;
+    padding: 35px;
     border-radius: 15px;
     text-align: center;
-    width: 45%; /* Takes up slightly less than half the container width */
-    min-width: 300px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(50, 94, 171, 0.7);
+    width: 45%; 
+    min-width: 320px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(50, 94, 171, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.founder-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(103, 172, 255, 0.2);
+    border-color: var(--gradient-start);
 }
 
 .profile-pic {
-    width: 180px;
-    height: 180px;
+    width: 200px; 
+    height: 200px;
     object-fit: cover;
-    border-radius: 50%; /* Making them perfectly circular */
-    margin-bottom: 15px;
-    /* CHANGED: Border color updated */
-    border: 5px solid var(--gradient-end);
-    transition: transform 0.3s ease;
+    border-radius: 50%; 
+    margin-bottom: 20px;
+    border: 5px solid var(--gradient-end); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .founder-card:hover .profile-pic {
-    transform: scale(1.05);
+    transform: scale(1.03);
+    box-shadow: 0 0 0 8px rgba(103, 172, 255, 0.2); 
 }
 
 .founder-card h3 {
     color: var(--gradient-end);
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-size: 1.6em;
+    font-weight: 600;
 }
 
 .founder-card .role {
-    color: var(--accent-blue);
+    color: var(--text-subtle); 
     font-style: italic;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 0.95em;
 }
 
 .founder-card .bio {
-    text-align: left;
-    font-size: 0.95em;
+    text-align: center; 
+    font-size: 1em;
+    line-height: 1.7;
+    color: var(--text-light);
+    font-weight: 400;
 }
 
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        height: auto;
+    }
+    .nav-container {
+        position: static;
+        transform: none;
+        width: 100%;
+    }
+    nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px;
+    }
+    nav ul li {
+        margin: 5px 10px;
+    }
+    .hero-overlay h2 {
+        font-size: 2.5em;
+    }
+    .product-gallery h3 {
+        font-size: 2em;
+    }
     .founders-profiles {
         flex-direction: column;
         align-items: center;
@@ -366,5 +428,22 @@ footer {
     .founder-card {
         width: 100%;
         margin-bottom: 20px;
+    }
+    .main-heading {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.5em;
+    }
+    nav ul li {
+        margin: 5px 8px;
+        font-size: 0.85em;
+    }
+    .cta-button {
+        padding: 12px 30px;
+        font-size: 0.9em;
     }
 }
