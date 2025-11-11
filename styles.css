@@ -3,10 +3,10 @@
     --bg-dark: #1e2832; /* Very faint blue shade (mostly on the black side) */
     --accent-blue: #325eab; /* Darker accent */
     --gradient-start: #3373f5;
-    --gradient-end: #4e9efe;
+    --gradient-end: #67acff; /* CHANGED: Lighter blue for gradient end */
     --text-light: #f0f8ff; /* Near white for readability */
     --card-bg: #2b3945; /* Slightly lighter dark for card background */
-    --border-color: rgba(78, 158, 254, 0.5);
+    --border-color: rgba(103, 172, 255, 0.5); /* Updated border to match new gradient end */
 }
 
 /* Base Styles */
@@ -48,8 +48,8 @@ header {
 }
 
 .logo h1 {
-    /* Apply the blue-white gradient to the logo text */
-    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end), var(--text-light));
+    /* Apply the blue-light blue gradient to the logo text */
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); /* Removed --text-light */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 1.8em;
@@ -155,8 +155,8 @@ nav ul li a {
 .hero-overlay h2 {
     font-size: 3em;
     margin-bottom: 20px;
-    /* Apply the blue-white gradient to the main headline */
-    background: linear-gradient(45deg, var(--text-light), var(--gradient-end));
+    /* CHANGED: Apply the blue-light blue gradient to the main headline */
+    background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start)); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -174,7 +174,8 @@ nav ul li a {
 
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(51, 115, 245, 0.5);
+    /* Updated box-shadow to match new gradient */
+    box-shadow: 0 5px 15px rgba(103, 172, 255, 0.5); 
     color: var(--bg-dark); /* Keep color dark on hover */
 }
 
@@ -200,6 +201,7 @@ nav ul li a {
 
 .product-card {
     background-color: var(--card-bg);
+    /* CHANGED: Updated border color to new gradient end */
     border: 1px solid var(--border-color);
     border-radius: 10px;
     overflow: hidden;
@@ -211,7 +213,8 @@ nav ul li a {
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(78, 158, 254, 0.3);
+    /* CHANGED: Updated box-shadow to new gradient end */
+    box-shadow: 0 8px 20px rgba(103, 172, 255, 0.3);
 }
 
 .product-card img {
@@ -275,6 +278,7 @@ footer {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 40px;
+    /* CHANGED: Gradient updated */
     background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -287,6 +291,7 @@ footer {
     margin: 0 auto 50px auto;
     padding: 20px;
     border-radius: 8px;
+    /* CHANGED: Border color updated */
     border: 1px solid var(--border-color);
     background-color: var(--card-bg);
 }
@@ -327,6 +332,7 @@ footer {
     object-fit: cover;
     border-radius: 50%; /* Making them perfectly circular */
     margin-bottom: 15px;
+    /* CHANGED: Border color updated */
     border: 5px solid var(--gradient-end);
     transition: transform 0.3s ease;
 }
