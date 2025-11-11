@@ -1,9 +1,9 @@
-/* Import Google Font for a modern look (e.g., Inter) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Import Google Font for a modern look (e.g., Inter), now including Weight 100 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;600;700&display=swap');
 
 /* Custom Properties for Colors */
 :root {
-    --bg-dark: #101010; /* Pure black for background */
+    --bg-dark: #101010; 
     --accent-blue: #325eab;
     --gradient-start: #3373f5;
     --gradient-end: #67acff; 
@@ -40,6 +40,8 @@ a:hover {
     transform: translateY(-1px);
 }
 
+---
+
 /* --- Header and Navigation --- */
 header {
     background-color: var(--header-bg); 
@@ -62,12 +64,14 @@ header {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 1.8em;
-    font-weight: 700;
-    letter-spacing: 1px;
+    /* NEW: Weight 100 */
+    font-weight: 100; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
 }
 
 .nav-container {
-    position: absolute; 
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     top: 50px; 
@@ -86,9 +90,11 @@ nav ul li {
 }
 
 nav ul li a {
-    font-weight: 500; 
+    /* NEW: Weight 100 */
+    font-weight: 100; 
     padding: 8px 10px;
-    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px; 
     font-size: 0.95em;
     color: var(--text-light); 
 }
@@ -99,14 +105,17 @@ nav ul li a:hover {
 }
 
 .active-link {
+    /* Slightly heavier than 100 for visual distinction */
     color: var(--gradient-end) !important;
-    font-weight: 600 !important;
+    font-weight: 200 !important; 
 }
+
+---
 
 /* --- Hero Section (Spotlight Image Implementation) --- */
 .hero-section {
     position: relative;
-    height: 100vh; 
+    height: 100vh;
     width: 100%;
     overflow: hidden;
     display: flex; 
@@ -114,19 +123,16 @@ nav ul li a:hover {
     align-items: center;
     text-align: center;
     
-    /* Spotlight Image */
-    background-color: #000000; /* Ensures true black if image doesn't cover or is transparent */
-    background-image: url('spotlight.png'); /* REFERENCES YOUR UPLOADED IMAGE */
+    background-color: #000000;
+    background-image: url('spotlight.png'); 
     background-size: cover; 
-    background-position: center bottom; /* Adjusts to position the spotlight on the "floor" */
+    background-position: center bottom; 
     background-repeat: no-repeat;
     
-    /* OPTIONAL: Subtle dark overlay to ensure text visibility */
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); 
 }
 
 .video-container {
-    /* FIXED: Hide the video since the background image is now the focus */
     display: none;
 }
 
@@ -145,8 +151,10 @@ nav ul li a:hover {
 .hero-overlay h2 {
     font-size: 5em;
     margin-bottom: 10px;
-    font-weight: 700; 
-    letter-spacing: 3px;
+    /* NEW: Weight 100 */
+    font-weight: 100; 
+    text-transform: uppercase;
+    letter-spacing: 10px; 
     background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start)); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -179,9 +187,11 @@ nav ul li a:hover {
     color: var(--bg-dark);
 }
 
+---
+
 /* --- Product Gallery Section --- */
 .product-gallery {
-    padding: 100px 5%; 
+    padding: 120px 5%; 
     text-align: center;
     background-color: var(--bg-dark);
 }
@@ -193,7 +203,91 @@ nav ul li a:hover {
     font-weight: 600;
     letter-spacing: 1px;
 }
-/* ... (rest of the product card and footer styles remain the same) ... */
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; 
+    justify-content: center;
+}
+
+.product-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(103, 172, 255, 0.2); 
+    border-radius: 12px;
+    overflow: hidden;
+    width: 320px;
+    padding: 25px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 40px rgba(103, 172, 255, 0.3); 
+    border-color: var(--gradient-start); 
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px; 
+    margin-bottom: 20px;
+    opacity: 0.8; 
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover img {
+    opacity: 1; 
+}
+
+.product-card h4 {
+    color: var(--gradient-end); 
+    margin-bottom: 8px;
+    font-size: 1.4em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.product-card p {
+    color: var(--text-subtle); 
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.see-more {
+    padding: 10px 25px;
+    background: transparent; 
+    color: var(--gradient-end); 
+    border: 1px solid var(--gradient-end); 
+    border-radius: 50px; 
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-size: 0.95em;
+}
+
+.see-more:hover {
+    background-color: var(--gradient-start); 
+    color: var(--bg-dark); 
+    border-color: var(--gradient-start);
+}
+
+---
+
+/* --- Footer --- */
+footer {
+    background-color: #0b0b0b; 
+    text-align: center;
+    padding: 30px 5%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); 
+    font-size: 0.85em;
+    color: var(--text-subtle);
+}
+
+---
 
 /* --- About Us Page (page1.html) Styles --- */
 
@@ -202,9 +296,114 @@ nav ul li a:hover {
     min-height: 80vh;
     background-color: var(--bg-dark);
 }
-/* ... (rest of the about us styles remain the same) ... */
 
-/* Media Query for smaller screens (remains the same) */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.main-heading {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 50px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.mission-statement {
+    font-size: 1.1em;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.mission-statement p {
+    color: var(--text-light);
+    font-weight: 300;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 50px 0;
+    opacity: 0.5;
+}
+
+.founders-profiles {
+    display: flex;
+    justify-content: center; 
+    gap: 40px;
+    flex-wrap: wrap; 
+}
+
+.founder-card {
+    background-color: var(--card-bg);
+    padding: 35px;
+    border-radius: 15px;
+    text-align: center;
+    width: 45%; 
+    min-width: 320px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(50, 94, 171, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.founder-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(103, 172, 255, 0.2);
+    border-color: var(--gradient-start);
+}
+
+.profile-pic {
+    width: 200px; 
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%; 
+    margin-bottom: 20px;
+    border: 5px solid var(--gradient-end); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.founder-card:hover .profile-pic {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 8px rgba(103, 172, 255, 0.2); 
+}
+
+.founder-card h3 {
+    color: var(--gradient-end);
+    margin-bottom: 8px;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+.founder-card .role {
+    color: var(--text-subtle); 
+    font-style: italic;
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 0.95em;
+}
+
+.founder-card .bio {
+    text-align: center; 
+    font-size: 1em;
+    line-height: 1.7;
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+---
+
+/* Media Query for smaller screens */
 @media (max-width: 768px) {
     header {
         position: static; 
@@ -230,14 +429,17 @@ nav ul li a:hover {
     }
     .hero-section {
         height: 70vh;
-        /* Adjust background position for smaller screens if needed */
         background-position: center center; 
     }
     .hero-overlay h2 {
         font-size: 3em;
+        letter-spacing: 5px;
     }
     .hero-overlay p {
         font-size: 1.2em;
+    }
+    .product-gallery {
+        padding-top: 60px;
     }
     .product-gallery h3 {
         font-size: 2em;
@@ -258,10 +460,12 @@ nav ul li a:hover {
 @media (max-width: 480px) {
     .logo h1 {
         font-size: 1.5em;
+        letter-spacing: 1px;
     }
     nav ul li {
         margin: 5px 8px;
         font-size: 0.85em;
+        letter-spacing: 1px;
     }
     .cta-button {
         padding: 12px 30px;
