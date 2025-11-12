@@ -1,22 +1,24 @@
-/* === The Fidget Shop — Stable + Themed Version === */
+/* =========================================================
+   GLOBAL STYLES - The Fidget Shop (Unified Theme)
+   ========================================================= */
 
-/* Google Font */
+/* Import Google Font for a modern look */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* --- Custom Properties --- */
+/* Color Variables */
 :root {
     --bg-dark: #101010;
     --accent-blue: #325eab;
     --gradient-start: #3373f5;
-    --gradient-end: #67acff;
-    --text-light: #e0e0e0;
-    --text-subtle: #888888;
+    --gradient-end: #67acff; 
+    --text-light: #e0e0e0; 
+    --text-subtle: #888888; 
     --card-bg: #1a1a1a;
     --border-color: rgba(103, 172, 255, 0.3);
-    --header-bg: transparent;
+    --header-bg: transparent; /* fully transparent header */
 }
 
-/* --- Base Styles --- */
+/* Base Reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -29,7 +31,6 @@ body {
     color: var(--text-light);
     line-height: 1.6;
     scroll-behavior: smooth;
-    padding-top: 120px; /* FIXED: prevents content jump when header changes */
 }
 
 a {
@@ -43,22 +44,24 @@ a:hover {
     transform: translateY(-1px);
 }
 
-/* --- Header and Navigation --- */
+/* =========================================================
+   HEADER (Fully Transparent)
+   ========================================================= */
+
 header {
-    background-color: var(--header-bg);
-    padding: 20px 5%;
+    background: none; /* absolute transparency */
+    backdrop-filter: none; /* no blur or fade */
+    border: none;
+    padding: 20px 5%; 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: none;
-    position: fixed; /* FIXED: absolute → fixed for stability */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    backdrop-filter: blur(10px); /* FIXED: adds stable light blur instead of fully transparent */
     height: 120px;
-    transition: background-color 0.3s ease;
 }
 
 .logo h1 {
@@ -71,10 +74,10 @@ header {
 }
 
 .nav-container {
-    position: static; /* FIXED: removes mid-screen overlap */
-    transform: none;
-    top: auto;
-    left: auto;
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px; 
 }
 
 nav ul {
@@ -83,25 +86,24 @@ nav ul {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     padding: 8px 10px;
-    background: rgba(16, 16, 16, 0.6); /* subtle backdrop stability */
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.0); /* fully clear container */
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 15px; 
 }
 
 nav ul li a {
-    font-weight: 500;
+    font-weight: 500; 
     padding: 8px 10px;
     letter-spacing: 0.5px;
     font-size: 0.95em;
-    color: var(--text-light);
+    color: var(--text-light); 
 }
 
 nav ul li a:hover {
     color: var(--gradient-end);
-    transform: none;
+    transform: none; 
 }
 
 .active-link {
@@ -109,13 +111,16 @@ nav ul li a:hover {
     font-weight: 600 !important;
 }
 
-/* --- Hero Section --- */
+/* =========================================================
+   HERO SECTION (Homepage Spotlight)
+   ========================================================= */
+
 .hero-section {
     position: relative;
-    min-height: 100dvh; /* FIXED: 100vh → 100dvh for mobile stability */
+    height: 100vh; 
     width: 100%;
     overflow: hidden;
-    display: flex;
+    display: flex; 
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -132,7 +137,7 @@ nav ul li a:hover {
 }
 
 .hero-overlay {
-    position: relative;
+    position: relative; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -140,16 +145,15 @@ nav ul li a:hover {
     padding: 20px;
     max-width: 800px;
     color: var(--text-light);
-    z-index: 10;
-    will-change: transform, opacity; /* FIXED: smooth animations */
+    z-index: 10; 
 }
 
 .hero-overlay h2 {
     font-size: 5em;
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 700; 
     letter-spacing: 3px;
-    background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start));
+    background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start)); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -163,160 +167,45 @@ nav ul li a:hover {
 }
 
 .cta-button {
-    padding: 14px 40px;
+    padding: 14px 40px; 
     background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    color: var(--bg-dark);
-    font-weight: 600;
-    border-radius: 50px;
+    color: var(--bg-dark); 
+    font-weight: 600; 
+    border-radius: 50px; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 1.1em;
-    will-change: transform, box-shadow; /* FIXED */
 }
 
 .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(103, 172, 255, 0.6);
+    transform: translateY(-3px); 
+    box-shadow: 0 8px 25px rgba(103, 172, 255, 0.6); 
     color: var(--bg-dark);
 }
 
-/* --- Product Gallery --- */
+/* =========================================================
+   PRODUCT GALLERY
+   ========================================================= */
+
 .product-gallery {
-    padding: 100px 5%;
+    padding: 100px 5%; 
     text-align: center;
     background-color: var(--bg-dark);
 }
 
 .product-gallery h3 {
-    font-size: 2.8em;
+    font-size: 2.8em; 
     margin-bottom: 60px;
-    color: var(--text-light);
+    color: var(--text-light); 
     font-weight: 600;
     letter-spacing: 1px;
 }
 
-/* --- Product Cards --- */
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-}
-
-.product-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(103, 172, 255, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    will-change: transform, box-shadow; /* FIXED */
-}
-
-.product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 25px rgba(103, 172, 255, 0.3);
-}
-
-.product-card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.product-card h4 {
-    font-size: 1.3em;
-    color: var(--gradient-end);
-    margin-bottom: 10px;
-}
-
-.product-card p {
-    color: var(--text-subtle);
-    font-size: 0.95em;
-    margin-bottom: 20px;
-}
-
-.see-more {
-    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    color: var(--bg-dark);
-    border: none;
-    border-radius: 50px;
-    padding: 10px 25px;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    will-change: transform, box-shadow;
-}
-
-.see-more:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(103, 172, 255, 0.5);
-}
-
-/* --- Footer --- */
-footer {
-    background-color: #0b0b0b;
-    text-align: center;
-    padding: 30px 5%;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 0.85em;
-    color: var(--text-subtle);
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 768px) {
-    header {
-        position: static;
-        flex-direction: column;
-        padding: 15px 0;
-        height: auto;
-        background-color: #101010;
-        backdrop-filter: none;
-    }
-    body {
-        padding-top: 0;
-    }
-    nav ul {
-        margin-top: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 6px;
-    }
-    nav ul li {
-        margin: 5px 10px;
-    }
-    .hero-section {
-        min-height: 70dvh;
-        background-position: center center;
-    }
-    .hero-overlay h2 {
-        font-size: 3em;
-    }
-    .hero-overlay p {
-        font-size: 1.2em;
-    }
-    .product-gallery h3 {
-        font-size: 2em;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo h1 {
-        font-size: 1.5em;
-    }
-    nav ul li {
-        margin: 5px 8px;
-        font-size: 0.85em;
-    }
-    .cta-button {
-        padding: 12px 30px;
-        font-size: 0.9em;
-    }
-}
-/* ================================
+/* =========================================================
    ABOUT US PAGE (page1.html)
-===================================*/
+   ========================================================= */
 
 .about-us-section {
     padding: 140px 5% 100px;
@@ -404,9 +293,9 @@ footer {
     line-height: 1.7;
 }
 
-/* ================================
+/* =========================================================
    CONTACT PAGE (page2.html)
-===================================*/
+   ========================================================= */
 
 .contact-section {
     padding: 140px 5% 100px;
@@ -493,9 +382,9 @@ footer {
     object-fit: cover;
 }
 
-/* ================================
-   FOOTER (Unified)
-===================================*/
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer {
     background-color: var(--card-bg);
@@ -506,27 +395,68 @@ footer {
     font-size: 0.9em;
 }
 
-/* ================================
-   RESPONSIVE ADJUSTMENTS
-===================================*/
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
 @media (max-width: 768px) {
+    header {
+        position: static; 
+        flex-direction: column;
+        height: auto;
+        background: none;
+    }
+
+    .nav-container {
+        position: static; 
+        transform: none;
+        width: 100%;
+    }
+
+    nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px;
+        background: none;
+    }
+
+    .hero-section {
+        height: 70vh;
+        background-position: center center; 
+    }
+
+    .hero-overlay h2 {
+        font-size: 3em;
+    }
+
+    .hero-overlay p {
+        font-size: 1.2em;
+    }
+
+    .product-gallery h3 {
+        font-size: 2em;
+    }
+
     .founders-profiles {
         flex-direction: column;
         align-items: center;
     }
+
     .founder-card {
         width: 90%;
     }
+
     .contact-grid {
         flex-direction: column;
         text-align: center;
     }
+
     .contact-info {
         text-align: center;
     }
+
     .contact-image-container {
         max-width: 90%;
     }
 }
-
