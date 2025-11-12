@@ -1,451 +1,213 @@
-/* Custom Properties for Colors */
+/* Import Google Font (better performance using <link> instead of @import)
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+*/
+
+/* Custom Properties */
 :root {
-    --bg-dark: #101010;
-    --accent-blue: #325eab;
-    --gradient-start: #3373f5;
-    --gradient-end: #67acff;
-    --text-light: #e0e0e0;
-    --text-subtle: #888888;
-    --card-bg: #1a1a1a;
-    --border-color: rgba(103, 172, 255, 0.3);
-    /* Solid color for fallback, transparent for fixed header with blur */
-    --header-bg-solid: #101010; 
-    --header-bg-transparent: rgba(16, 16, 16, 0.9);
+    --bg-dark: #101010;
+    --accent-blue: #325eab;
+    --gradient-start: #3373f5;
+    --gradient-end: #67acff;
+    --text-light: #e0e0e0;
+    --text-subtle: #888888;
+    --card-bg: #1a1a1a;
+    --border-color: rgba(103, 172, 255, 0.3);
+    --header-bg: rgba(16, 16, 16, 0.8); /* FIXED: translucent, not fully transparent */
 }
 
-/* Base Styles */
+/* Base */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* ⚠️ NOTE: Font loading should now be handled by a <link> tag in your HTML header. */
 body {
-    font-family: 'Inter', sans-serif; 
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-    scroll-behavior: smooth;
-    padding-top: 120px; /* Fixed header offset */
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    padding-top: 120px; /* FIXED: prevents layout shift from fixed header */
 }
 
+/* Links */
 a {
-    color: var(--text-light);
-    text-decoration: none;
-    transition: color 0.3s ease, transform 0.2s ease;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
-
 a:hover {
-    color: var(--gradient-end);
-    transform: translateY(-1px);
+    color: var(--gradient-end);
+    transform: translateY(-1px);
 }
 
-/* --- Header and Navigation --- */
+/* --- Header --- */
 header {
-    background-color: var(--header-bg-transparent); /* Transparent for desktop blur */
-    padding: 20px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    height: 120px;
+    background-color: var(--header-bg);
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* FIXED: stable position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 120px;
+    backdrop-filter: blur(10px); /* FIXED: adds stable blur instead of transparent */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo h1 {
-    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 1.8em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .nav-container {
-    position: static; 
+    position: static; /* FIXED: removed absolute to stop mid-screen overlap */
 }
 
 nav ul {
-    list-style: none;
-    display: flex;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-    padding: 8px 10px;
-    backdrop-filter: blur(5px);
+    list-style: none;
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 8px 10px;
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 15px;
 }
 
 nav ul li a {
-    font-weight: 500;
-    padding: 8px 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 0.95em;
-    color: var(--text-light);
+    font-weight: 500;
+    padding: 8px 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.95em;
+    color: var(--text-light);
 }
-
 nav ul li a:hover {
-    color: var(--gradient-end);
-    transform: none;
+    color: var(--gradient-end);
+    transform: none;
 }
 
 .active-link {
-    color: var(--gradient-end) !important;
-    font-weight: 600 !important;
+    color: var(--gradient-end) !important;
+    font-weight: 600 !important;
 }
 
 /* --- Hero Section --- */
 .hero-section {
-    position: relative;
-    min-height: calc(100dvh - 120px); /* 100dvh minus header height for full screen effect */
-    margin-top: -120px; /* Pulls it up to start at the top, behind the fixed header */
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    position: relative;
+    min-height: 100dvh; /* FIXED: prevents mobile viewport jump */
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
-    background-color: var(--bg-dark); /* Solid fallback */
-    background-image: url('spotlight.png');
-    background-size: cover;
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4);
+    background-color: #000;
+    background-image: url('spotlight.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4);
 }
 
 .video-container {
-    display: none;
+    display: none;
 }
 
 .hero-overlay {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    max-width: 800px;
-    color: var(--text-light);
-    z-index: 10;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    max-width: 800px;
+    color: var(--text-light);
+    z-index: 10;
 }
 
 .hero-overlay h2 {
-    font-size: 5em;
-    margin-bottom: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-overlay p {
-    font-size: 1.5em;
-    font-weight: 300;
-    color: var(--text-subtle);
-    margin-bottom: 40px;
-    letter-spacing: 1px;
+    font-size: 1.5em;
+    font-weight: 300;
+    color: var(--text-subtle);
+    margin-bottom: 40px;
+    letter-spacing: 1px;
 }
 
 .cta-button {
-    padding: 14px 40px;
-    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    color: var(--bg-dark);
-    font-weight: 600;
-    border-radius: 50px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: none;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-size: 1.1em;
-    will-change: transform, box-shadow; 
+    padding: 14px 40px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    color: var(--bg-dark);
+    font-weight: 600;
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    will-change: transform, box-shadow; /* FIXED: smoother GPU rendering */
 }
-
 .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(103, 172, 255, 0.6);
-    color: var(--bg-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(103, 172, 255, 0.6);
 }
 
-/* --- Product Gallery --- */
-.product-gallery {
-    padding: 120px 5%;
-    text-align: center;
-    background-color: var(--bg-dark);
-}
-
-.product-gallery h3 {
-    font-size: 2.8em;
-    margin-bottom: 60px;
-    color: var(--text-light);
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-}
-
+/* --- Product Cards --- */
 .product-card {
-    background-color: var(--card-bg);
-    border: 1px solid rgba(103, 172, 255, 0.2);
-    border-radius: 12px;
-    overflow: hidden;
-    width: 300px;
-    padding: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    will-change: transform, box-shadow;
+    will-change: transform, box-shadow; /* FIXED */
 }
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(103, 172, 255, 0.3);
-}
-
-.product-card img {
-    width: 100%;
-    height: auto;
-    max-height: 180px; 
-    object-fit: cover;
-    border-radius: 8px; 
-    margin-bottom: 20px;
-}
-
-.product-card h4 {
-    color: var(--gradient-end); 
-    margin-bottom: 8px;
-    font-size: 1.3em;
-    font-weight: 600;
-}
-
-.product-card p {
-    color: var(--text-subtle); 
-    font-size: 0.9em;
-    margin-bottom: 20px;
-}
-
-.see-more {
-    padding: 10px 25px;
-    background: transparent; 
-    color: var(--gradient-end); 
-    border: 1px solid var(--gradient-end); 
-    border-radius: 50px; 
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    font-size: 0.95em;
-}
-
-.see-more:hover {
-    background-color: var(--gradient-start); 
-    color: var(--bg-dark); 
-    border-color: var(--gradient-start);
-}
-
 
 /* --- Footer --- */
 footer {
-    background-color: #0b0b0b;
-    text-align: center;
-    padding: 30px 5%;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 0.85em;
-    color: var(--text-subtle);
-}
-
-/* --- Utility Classes (for page1/page2 content) --- */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.main-heading {
+    background-color: #0b0b0b;
     text-align: center;
-    font-size: 3em;
-    margin-bottom: 50px;
-    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-}
-
-/* --- About Us Page (page1.html) Styles --- */
-
-.about-us-section {
-    padding: 60px 5%;
-    min-height: 80vh;
-    background-color: var(--bg-dark);
-}
-
-.mission-statement {
-    font-size: 1.1em;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 60px auto;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    background-color: var(--card-bg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* --- Contact Page (page2.html) Styles --- */
-
-.contact-section {
-    padding: 60px 5%; 
-    padding-bottom: 100px;
-    background-color: var(--bg-dark);
-    min-height: 80vh;
-}
-
-.contact-grid {
-    display: flex;
-    gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-    align-items: stretch;
-}
-
-.contact-info {
-    flex: 1;
-    padding: 30px;
-    border-radius: 12px;
-    background-color: var(--card-bg);
-    border: 1px solid rgba(103, 172, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.contact-info h3 {
-    font-size: 1.8em;
-    color: var(--gradient-end);
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-.info-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 1em;
-    color: var(--text-light);
-}
-
-.info-item i {
-    color: var(--gradient-start);
-    margin-right: 15px;
-    width: 20px;
-    text-align: center;
-}
-
-.social-links {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.social-links a {
-    font-size: 1.8em;
-    margin-right: 20px;
+    padding: 30px 5%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.85em;
     color: var(--text-subtle);
 }
 
-.social-links a:hover {
-    color: var(--gradient-end);
-}
-
-.contact-image-container {
-    flex: 1;
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    background-color: var(--card-bg);
-}
-
-.contact-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    /* Image Fade Effect */
-    mask-image: linear-gradient(to right, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
-}
-
-/* --- Responsive Fixes --- */
+/* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
-    header {
-        position: static; /* Header stays static on small screens */
-        flex-direction: column;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        height: auto;
-        background-color: var(--header-bg-solid); /* Use solid color to prevent mobile blur issues */
-        backdrop-filter: none;
-    }
-    
+    header {
+        position: static; /* FIXED: prevent overlapping hero on mobile */
+        background-color: #101010;
+    }
     body {
-        padding-top: 0; /* No padding needed when header is static */
-    }
-
-    .hero-section {
-        min-height: 70dvh;
-        margin-top: 0; /* Reset margin */
-        background-position: center center;
-    }
-    .hero-overlay h2 {
-        font-size: 3em;
-        letter-spacing: 2px;
-    }
-    .hero-overlay p {
-        font-size: 1.2em;
-    }
-    .product-gallery,
-    .about-us-section,
-    .contact-section {
-        padding-top: 40px;
+        padding-top: 0; /* remove offset when header becomes static */
     }
-}
-
-@media (max-width: 900px) {
-    .contact-grid {
-        flex-direction: column;
+    .hero-section {
+        min-height: 70dvh;
+        background-position: center center;
     }
-    .contact-image-container {
-        height: 300px; 
+    .hero-overlay h2 {
+        font-size: 3em;
+        letter-spacing: 2px;
     }
-    .contact-image {
-        mask-image: none;
-        -webkit-mask-image: none;
+    .hero-overlay p {
+        font-size: 1.2em;
     }
-}
-
-@media (max-width: 480px) {
-    .logo h1 {
-        font-size: 1.5em;
-    }
-    nav ul li {
-        margin: 5px 8px;
-        font-size: 0.85em;
-    }
-    .cta-button {
-        padding: 12px 30px;
-        font-size: 0.9em;
-    }
 }
