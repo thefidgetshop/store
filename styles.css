@@ -444,67 +444,55 @@ a:hover {
    HEADER (Fully Transparent)
    ========================================================= */
 
+/* --- NAVIGATION BAR FIX --- */
 header {
-    background: none; /* absolute transparency */
-    backdrop-filter: none; /* no blur or fade */
-    border: none;
-    padding: 20px 5%; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
+    width: 100%;
+    background: transparent; /* still transparent per your earlier request */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
     z-index: 1000;
-    height: 120px;
-}
-
-.logo h1 {
-    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 1.8em;
-    font-weight: 700;
-    letter-spacing: 1px;
+    padding: 10px 0;
 }
 
 .nav-container {
-    position: absolute; 
-    left: 50%;
-    transform: translateX(-50%);
-    top: 50px; 
+    width: 100%;
+    max-width: 1400px; /* increased for more horizontal room */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul {
-    list-style: none;
     display: flex;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-    padding: 8px 10px;
-    background: rgba(0, 0, 0, 0.0); /* fully clear container */
+    flex-wrap: nowrap; /* keep items in a single line */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 30px; /* add spacing between links */
 }
 
-nav ul li {
-    margin: 0 15px; 
+nav li {
+    white-space: nowrap; /* prevent line breaks */
 }
 
-nav ul li a {
-    font-weight: 500; 
-    padding: 8px 10px;
-    letter-spacing: 0.5px;
-    font-size: 0.95em;
-    color: var(--text-light); 
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
-nav ul li a:hover {
-    color: var(--gradient-end);
-    transform: none; 
+nav a:hover, nav a.active-link {
+    color: #4cd3c2; /* accent color */
 }
 
-.active-link {
-    color: var(--gradient-end) !important;
-    font-weight: 600 !important;
+/* ensure logo and nav align nicely */
+header .logo {
+    position: absolute;
+    left: 40px;
+    top: 10px;
 }
 
 /* =========================================================
