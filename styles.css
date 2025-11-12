@@ -314,3 +314,219 @@ footer {
         font-size: 0.9em;
     }
 }
+/* ================================
+   ABOUT US PAGE (page1.html)
+===================================*/
+
+.about-us-section {
+    padding: 140px 5% 100px;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    text-align: center;
+}
+
+.main-heading {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 30px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+.mission-statement {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    font-size: 1.1em;
+    color: var(--text-subtle);
+    line-height: 1.8;
+}
+
+.divider {
+    width: 60%;
+    margin: 50px auto;
+    border: none;
+    border-top: 1px solid var(--border-color);
+}
+
+.founders-profiles {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.founder-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 30px;
+    width: 350px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.founder-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 35px rgba(103, 172, 255, 0.3);
+}
+
+.profile-pic {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 2px solid var(--gradient-end);
+}
+
+.founder-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.role {
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--gradient-end);
+    margin-bottom: 15px;
+}
+
+.bio {
+    font-size: 0.95em;
+    color: var(--text-subtle);
+    line-height: 1.7;
+}
+
+/* ================================
+   CONTACT PAGE (page2.html)
+===================================*/
+
+.contact-section {
+    padding: 140px 5% 100px;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    text-align: center;
+}
+
+.contact-section .main-heading {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 50px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.contact-info {
+    flex: 1;
+    max-width: 450px;
+    text-align: left;
+}
+
+.contact-info h3 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    color: var(--gradient-end);
+}
+
+.contact-info p {
+    color: var(--text-subtle);
+    margin-bottom: 25px;
+    font-size: 1.05em;
+    line-height: 1.8;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    color: var(--text-light);
+}
+
+.info-item i {
+    font-size: 1.2em;
+    color: var(--gradient-end);
+}
+
+.social-links {
+    margin-top: 25px;
+}
+
+.social-links a {
+    margin-right: 15px;
+    color: var(--text-light);
+    font-size: 1.5em;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--gradient-end);
+    transform: translateY(-3px);
+}
+
+.contact-image-container {
+    flex: 1;
+    max-width: 450px;
+}
+
+.contact-image {
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+}
+
+/* ================================
+   FOOTER (Unified)
+===================================*/
+
+footer {
+    background-color: var(--card-bg);
+    text-align: center;
+    padding: 25px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-subtle);
+    font-size: 0.9em;
+}
+
+/* ================================
+   RESPONSIVE ADJUSTMENTS
+===================================*/
+
+@media (max-width: 768px) {
+    .founders-profiles {
+        flex-direction: column;
+        align-items: center;
+    }
+    .founder-card {
+        width: 90%;
+    }
+    .contact-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+    .contact-info {
+        text-align: center;
+    }
+    .contact-image-container {
+        max-width: 90%;
+    }
+}
+
