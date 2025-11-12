@@ -1,17 +1,16 @@
-/* Import Google Font for a modern look (e.g., Inter) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 /* Custom Properties for Colors */
 :root {
     --bg-dark: #101010;
     --accent-blue: #325eab;
-    --gradient-start: #3373f5; /* Theme Color 1 */
-    --gradient-end: #67acff;  /* Theme Color 2 */
-    --text-light: #e0e0e0; 
-    --text-subtle: #888888; 
+    --gradient-start: #3373f5;
+    --gradient-end: #67acff;
+    --text-light: #e0e0e0;
+    --text-subtle: #888888;
     --card-bg: #1a1a1a;
     --border-color: rgba(103, 172, 255, 0.3);
-    --header-bg: rgba(16, 16, 16, 0.9); /* Semi-transparent for blur effect */
+    /* Solid color for fallback, transparent for fixed header with blur */
+    --header-bg-solid: #101010; 
+    --header-bg-transparent: rgba(16, 16, 16, 0.9);
 }
 
 /* Base Styles */
@@ -21,13 +20,14 @@
     padding: 0;
 }
 
+/* ⚠️ NOTE: Font loading should now be handled by a <link> tag in your HTML header. */
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif; 
     background-color: var(--bg-dark);
     color: var(--text-light);
     line-height: 1.6;
     scroll-behavior: smooth;
-    padding-top: 120px; /* offsets fixed header */
+    padding-top: 120px; /* Fixed header offset */
 }
 
 a {
@@ -43,7 +43,7 @@ a:hover {
 
 /* --- Header and Navigation --- */
 header {
-    background-color: var(--header-bg);
+    background-color: var(--header-bg-transparent); /* Transparent for desktop blur */
     padding: 20px 5%;
     display: flex;
     justify-content: space-between;
@@ -69,7 +69,7 @@ header {
 }
 
 .nav-container {
-    position: static;
+    position: static; 
 }
 
 nav ul {
@@ -107,7 +107,8 @@ nav ul li a:hover {
 /* --- Hero Section --- */
 .hero-section {
     position: relative;
-    min-height: 100dvh; 
+    min-height: calc(100dvh - 120px); /* 100dvh minus header height for full screen effect */
+    margin-top: -120px; /* Pulls it up to start at the top, behind the fixed header */
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -115,7 +116,7 @@ nav ul li a:hover {
     align-items: center;
     text-align: center;
 
-    background-color: #000000;
+    background-color: var(--bg-dark); /* Solid fallback */
     background-image: url('spotlight.png');
     background-size: cover;
     background-position: center bottom;
@@ -169,7 +170,7 @@ nav ul li a:hover {
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 1.1em;
-    will-change: transform, box-shadow;
+    will-change: transform, box-shadow; 
 }
 
 .cta-button:hover {
@@ -217,7 +218,6 @@ nav ul li a:hover {
     box-shadow: 0 10px 20px rgba(103, 172, 255, 0.3);
 }
 
-/* Card image, title, text, and button styles */
 .product-card img {
     width: 100%;
     height: auto;
@@ -289,7 +289,7 @@ footer {
 /* --- About Us Page (page1.html) Styles --- */
 
 .about-us-section {
-    padding: 60px 5%; /* adjusted padding for pages with header offset */
+    padding: 60px 5%;
     min-height: 80vh;
     background-color: var(--bg-dark);
 }
@@ -305,8 +305,6 @@ footer {
     background-color: var(--card-bg);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
-
-/* Founder cards styles omitted for brevity, assuming they are in the stable version or will be added when needed */
 
 /* --- Contact Page (page2.html) Styles --- */
 
@@ -391,6 +389,40 @@ footer {
 }
 
 /* --- Responsive Fixes --- */
+@media (max-width: 768px) {
+    header {
+        position: static; /* Header stays static on small screens */
+        flex-direction: column;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        height: auto;
+        background-color: var(--header-bg-solid); /* Use solid color to prevent mobile blur issues */
+        backdrop-filter: none;
+    }
+    
+    body {
+        padding-top: 0; /* No padding needed when header is static */
+    }
+
+    .hero-section {
+        min-height: 70dvh;
+        margin-top: 0; /* Reset margin */
+        background-position: center center;
+    }
+    .hero-overlay h2 {
+        font-size: 3em;
+        letter-spacing: 2px;
+    }
+    .hero-overlay p {
+        font-size: 1.2em;
+    }
+    .product-gallery,
+    .about-us-section,
+    .contact-section {
+        padding-top: 40px;
+    }
+}
+
 @media (max-width: 900px) {
     .contact-grid {
         flex-direction: column;
@@ -402,34 +434,6 @@ footer {
         mask-image: none;
         -webkit-mask-image: none;
     }
-}
-
-@media (max-width: 768px) {
-    header {
-        position: static; 
-        flex-direction: column;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        height: auto;
-        background-color: #101010;
-    }
-    body {
-        padding-top: 0; /* reset padding when header static */
-    }
-    .hero-section {
-        min-height: 70dvh;
-        background-position: center center;
-    }
-    .hero-overlay h2 {
-        font-size: 3em;
-        letter-spacing: 2px;
-    }
-    .hero-overlay p {
-        font-size: 1.2em;
-    }
-    .product-gallery h3 {
-        font-size: 2em;
-    }
 }
 
 @media (max-width: 480px) {
