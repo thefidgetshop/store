@@ -1,76 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shipping FAQ - The Fidget Shop</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping FAQ - The Fidget Shop</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <h1>The Fidget Shop</h1>
-    </div>
-
+<header>
+    <div class="logo"><h1>The Fidget Shop</h1></div>
     <div class="nav-container">
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="page3.html">Our Collection</a></li>
-          <li><a href="page4.html">All Products</a></li>
-          <li><a href="page5.html">Our Favorites</a></li>
-          <li><a href="page6.html" class="active-link">Shipping FAQ</a></li>
-          <li><a href="page1.html">About Us</a></li>
-          <li><a href="page2.html">Contact</a></li>
-        </ul>
-      </nav>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="page3.html">Our Collection</a></li>
+                <li><a href="page4.html">All Products</a></li>
+                <li><a href="page5.html">Our Favorites</a></li>
+                <li><a href="page6.html" class="active-link">Shipping FAQ</a></li>
+                <li><a href="page1.html">About Us</a></li>
+                <li><a href="page2.html">Contact</a></li>
+            </ul>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <section class="faq-section">
-    <h2 class="main-heading">Shipping FAQ</h2>
-    <div class="faq-container">
+<section class="faq-section">
+    <h2>Shipping FAQ</h2>
 
-      <div class="faq-item">
+    <div class="faq-item">
         <button class="faq-question">Do we ship nationwide?</button>
-        <div class="faq-answer">
-          <p>Yes! We ship all across the United States with standard and express options.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">How long does shipping take?</button>
-        <div class="faq-answer">
-          <p>Orders are typically processed in 1–2 business days and delivered within 5–7 days.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">Do you offer international shipping?</button>
-        <div class="faq-answer">
-          <p>Currently, we ship to select international regions. Please contact us for details.</p>
-        </div>
-      </div>
-
+        <div class="faq-answer">Yes! We proudly ship to all 50 states in the U.S.</div>
     </div>
-  </section>
 
-  <footer>
+    <div class="faq-item">
+        <button class="faq-question">How long does shipping take?</button>
+        <div class="faq-answer">Standard shipping usually takes 3–5 business days.</div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Do you offer international shipping?</button>
+        <div class="faq-answer">Currently, we only ship within the United States.</div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Can I track my order?</button>
+        <div class="faq-answer">Yes. Once shipped, you’ll receive a tracking number via email.</div>
+    </div>
+</section>
+
+<footer>
     <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
-  </footer>
+</footer>
 
-  <script>
-    // FAQ dropdown behavior
-    document.querySelectorAll('.faq-question').forEach(button => {
-      button.addEventListener('click', () => {
-        const faqItem = button.parentElement;
-        faqItem.classList.toggle('active');
-      });
+<script>
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        button.classList.toggle('active');
+        const answer = button.nextElementSibling;
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
     });
-  </script>
+});
+</script>
 
 </body>
 </html>
