@@ -317,4 +317,192 @@ footer {
         font-size: 0.9em;
     }
 }
+/* =========================
+   PAGE 1-6 SPECIFIC FORMATTING
+========================= */
+
+/* --- About Us / Page1 --- */
+.about-us-section {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #0b0e16;
+}
+
+.about-us-section .main-heading {
+    font-size: 2.5rem;
+    color: #2e8bff;
+    margin-bottom: 2rem;
+}
+
+.about-us-section .mission-statement p {
+    font-size: 1.1rem;
+    color: #d0d6e0;
+    margin-bottom: 2rem;
+}
+
+.founders-profiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.founder-card {
+    background-color: #141a2e;
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(46, 139, 255, 0.2);
+}
+
+.founder-card img.profile-pic {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.founder-card h3 {
+    color: #2e8bff;
+    margin-bottom: 0.5rem;
+}
+
+.founder-card .role {
+    color: #a0b4e0;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.founder-card .bio {
+    color: #d0d6e0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* --- Contact / Page2 --- */
+.contact-section {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-section .main-heading {
+    font-size: 2.5rem;
+    color: #2e8bff;
+    margin-bottom: 2rem;
+}
+
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.contact-info {
+    max-width: 400px;
+    text-align: left;
+    background-color: #141a2e;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(46, 139, 255, 0.2);
+}
+
+.contact-info h3 {
+    color: #2e8bff;
+    margin-bottom: 1rem;
+}
+
+.contact-info p {
+    color: #d0d6e0;
+    margin-bottom: 1rem;
+}
+
+.contact-info .info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: #d0d6e0;
+}
+
+.contact-info .info-item i {
+    color: #2e8bff;
+}
+
+.contact-image-container img.contact-image {
+    width: 350px;
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+/* --- Shipping FAQ / Page6 --- */
+.faq-section {
+    padding: 4rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: #141a2e;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(46, 139, 255, 0.2);
+}
+
+.faq-question {
+    background-color: #1a2038;
+    color: #2e8bff;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.3s;
+}
+
+.faq-question:hover {
+    background-color: #232b4a;
+}
+
+.faq-answer {
+    display: none;
+    color: #d0d6e0;
+    padding: 1rem 1.5rem;
+    background-color: #181d31;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+/* --- Responsive tweaks for pages 1-6 --- */
+@media (max-width: 768px) {
+    .founders-profiles,
+    .contact-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .founder-card,
+    .contact-info {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-us-section .main-heading,
+    .contact-section .main-heading {
+        font-size: 2rem;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+    }
+}
 
