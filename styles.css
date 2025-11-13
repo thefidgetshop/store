@@ -1,12 +1,22 @@
-/* General Theme */
+/* =======================
+   GLOBAL STYLES
+======================= */
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: #0b0e19;
+    background-color: #0b0e19;
     color: #e8ecf4;
+    line-height: 1.6;
 }
 
-/* Header Toolbar */
+h1, h2, h3, h4 {
+    color: #6eb5ff;
+    margin-top: 0;
+}
+
+/* =======================
+   HEADER / NAVBAR
+======================= */
 header {
     background: linear-gradient(to right, #0d1b2a, #1b263b);
     color: white;
@@ -16,8 +26,8 @@ header {
     padding: 0 20px;
     height: 70px;
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
     z-index: 1000;
 }
 
@@ -38,15 +48,18 @@ header {
     color: #e8ecf4;
     text-decoration: none;
     margin: 0 15px;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .nav-container li a:hover,
-.active-link {
+.nav-container li a.active-link {
     color: #6eb5ff;
 }
 
-/* Spotlight Hero */
+/* =======================
+   HERO SECTIONS
+======================= */
+.hero-section,
 .hero-section.spotlight-hero {
     background: url('spotlight.png') center/cover no-repeat;
     height: 85vh;
@@ -66,7 +79,7 @@ header {
 .hero-overlay h2 {
     font-size: 2.4rem;
     color: #6eb5ff;
-    margin: 0;
+    margin-bottom: 0.5rem;
 }
 
 .hero-overlay p {
@@ -75,7 +88,24 @@ header {
     margin-top: 0.5rem;
 }
 
-/* Product Galleries */
+.cta-button {
+    display: inline-block;
+    background: #6eb5ff;
+    color: #0b0e19;
+    border-radius: 6px;
+    padding: 10px 20px;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #a8d0ff;
+}
+
+/* =======================
+   PRODUCT GALLERIES
+======================= */
 .product-gallery {
     text-align: center;
     padding: 100px 20px 60px;
@@ -94,7 +124,7 @@ header {
     width: 270px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
 }
 
 .product-card:hover {
@@ -111,7 +141,6 @@ header {
     margin: 10px 0;
 }
 
-/* See More Button */
 .see-more {
     background: #6eb5ff;
     color: #0b0e19;
@@ -126,10 +155,18 @@ header {
     background: #a8d0ff;
 }
 
-/* All Products Grid */
+/* =======================
+   ALL PRODUCTS PAGE
+======================= */
 .all-products {
     text-align: center;
     padding: 100px 30px 60px;
+}
+
+.all-products h2 {
+    font-size: 2rem;
+    color: #6eb5ff;
+    margin-bottom: 1rem;
 }
 
 .product-grid {
@@ -147,15 +184,106 @@ header {
     transition: transform 0.3s;
 }
 
+.product-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
 .product-item:hover {
     transform: scale(1.05);
 }
 
-/* FAQ Section */
+/* =======================
+   ABOUT PAGE
+======================= */
+.about-section {
+    max-width: 900px;
+    margin: 120px auto 80px;
+    padding: 20px;
+    background: #1b263b;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.about-section h2 {
+    text-align: center;
+    color: #6eb5ff;
+}
+
+.about-section p {
+    color: #e8ecf4;
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-align: justify;
+}
+
+/* =======================
+   CONTACT PAGE
+======================= */
+.contact-section {
+    max-width: 700px;
+    margin: 120px auto 60px;
+    padding: 30px;
+    background: #1b263b;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.contact-section h2 {
+    text-align: center;
+    color: #6eb5ff;
+    margin-bottom: 1rem;
+}
+
+.contact-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-section input,
+.contact-section textarea {
+    background: #0d1b2a;
+    color: #e8ecf4;
+    border: 1px solid #2e3a59;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 1rem;
+}
+
+.contact-section input::placeholder,
+.contact-section textarea::placeholder {
+    color: #94a4c4;
+}
+
+.contact-section button {
+    background: #6eb5ff;
+    color: #0b0e19;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.contact-section button:hover {
+    background: #a8d0ff;
+}
+
+/* =======================
+   FAQ PAGE
+======================= */
 .faq-section {
     max-width: 700px;
     margin: 120px auto 60px;
     padding: 0 20px;
+}
+
+.faq-section h2 {
+    text-align: center;
+    color: #6eb5ff;
+    margin-bottom: 1.5rem;
 }
 
 .faq-item {
@@ -172,6 +300,11 @@ header {
     font-size: 1.1rem;
     cursor: pointer;
     border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.faq-question:hover {
+    background: #243656;
 }
 
 .faq-answer {
@@ -183,11 +316,46 @@ header {
     margin-top: 5px;
 }
 
-/* Footer */
+/* =======================
+   FOOTER
+======================= */
 footer {
     background: #0d1b2a;
     text-align: center;
     padding: 25px 0;
     color: #6eb5ff;
     margin-top: 40px;
+}
+
+/* =======================
+   RESPONSIVE DESIGN
+======================= */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+
+    .nav-container ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-container li a {
+        margin: 8px 0;
+    }
+
+    .hero-overlay {
+        padding: 1.5rem;
+    }
+
+    .product-card {
+        width: 90%;
+    }
+
+    .about-section, .contact-section {
+        margin: 100px 20px;
+        padding: 20px;
+    }
 }
