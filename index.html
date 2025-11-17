@@ -3,85 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Fidget Shop - Your Destination for Fidgets</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Home – Spotlight Store</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <header>
-        <div class="logo">
-            <h1></h1>
+<header>
+    <div class="logo">
+        <h1>Spotlight</h1>
+    </div>
+
+    <div class="nav-container">
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active-link">Home</a></li>
+                <li><a href="page1.html">About Us</a></li>
+                <li><a href="page2.html">Contact</a></li>
+                <li><a href="page3.html">Collection</a></li>
+                <li><a href="page4.html">Products</a></li>
+                <li><a href="page5.html">Favorites</a></li>
+                <li><a href="page6.html">Shipping</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero-section">
+    <div class="hero-overlay">
+        <h2>Welcome</h2>
+        <p>Spotlighting premium picks for everyone.</p>
+        <button class="cta-button">Explore</button>
+    </div>
+</section>
+
+<section class="product-gallery">
+    <h3>Featured Products</h3>
+
+    <div class="card-container">
+
+        <div class="product-card">
+            <img src="sample1.png" alt="">
+            <h4>Premium Hoodie</h4>
+            <p>Soft, warm, and built to last.</p>
+            <button class="see-more-btn">See More</button>
         </div>
-        
-        <div class="nav-container">
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active-link">Home</a></li>
-                    <li><a href="page3.html">Our Collection</a></li>
-                    <li><a href="page4.html">All Products</a></li>
-                    <li><a href="page5.html">Our Favorites</a></li>
-                    <li><a href="page6.html">Shipping FAQ</a></li>
-                    <li><a href="page1.html">About Us</a></li>
-                    <li><a href="page2.html">Contact</a></li>
-                </ul>
-            </nav>
+
+        <div class="product-card">
+            <img src="sample2.png" alt="">
+            <h4>Stainless Bottle</h4>
+            <p>Keeps drinks cold for 24 hours.</p>
+            <button class="see-more-btn">See More</button>
         </div>
-    </header>
 
-    <main class="hero-section">
-        <div class="video-container">
-            <video autoplay muted loop playsinline poster="fidget_video_placeholder.jpg">
-                <source src="fidget_showcase.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <div class="product-card">
+            <img src="sample3.png" alt="">
+            <h4>LED Desk Lamp</h4>
+            <p>Bright, modern, and efficient.</p>
+            <button class="see-more-btn">See More</button>
         </div>
-        <div class="hero-overlay">
-            <h2>The Fidget Shop</h2> 
-            <p>Find Your Focus. Master Your Moment.</p> 
-            <a href="#gallery" class="cta-button">Explore Products</a>
-        </div>
-    </main>
 
-    <section id="gallery" class="product-gallery">
-        <h3>Our Curated Collection</h3> 
-        <div class="card-container">
-            
-            <div class="product-card">
-                <img src="spiral.png" alt="Image of The Spiral fidget toy">
-                <h4>The Spiral</h4>
-                <p>A mesmerizing tool designed for continuous, smooth, and quiet manipulation. Ideal for deep focus.</p>
-                <button class="see-more">See More</button>
-            </div>
+    </div>
+</section>
 
-            <div class="product-card">
-                <img src="inout.png" alt="Image of the Innie-Outie fidget toy">
-                <h4>Innie-Outie</h4>
-                <p>Features satisfying push/pull mechanics that provide dual sensory feedback. Great for tactile stimulation.</p>
-                <button class="see-more">See More</button>
-            </div>
 
-            <div class="product-card">
-                <img src="gearshift.png" alt="Image of the Gear Shifter fidget toy">
-                <h4>Gear Shifter</h4>
-                <p>A satisfying clicker with multiple adjustable positions, giving you mechanical feedback on demand.</p>
-                <button class="see-more">See More</button>
-            </div>
+<!-- UNIVERSAL MODAL -->
+<div id="productModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <img id="modalImage" class="modal-image" src="">
+        <h3 id="modalTitle"></h3>
+        <p id="modalDescription"></p>
+        <button class="buy-now-btn">Buy Now</button>
+    </div>
+</div>
 
-            <div class="product-card">
-                <img src="hexagon.png" alt="hexagon fidget">
-                <h4>Hexagon</h4>
-                <p>The classic hexagon fidget toy with even more layers for even more fun.</p>
-                <button class="see-more">See More</button>
-            </div>
 
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
-    </footer>
+<script src="script.js"></script>
 
 </body>
 </html>
