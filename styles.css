@@ -45,12 +45,11 @@ nav ul li a.active-link {
 }
 
 /* HERO SECTION (SPOTLIGHT IMAGE) */
-.hero {
-    height: 380px;
+.hero-section {
     background-image: url('spotlight.png');
     background-size: cover;
-    background-position: center top;
-    position: relative;
+    background-position: center bottom;
+    background-repeat: no-repeat;
 }
 
 .hero-overlay {
