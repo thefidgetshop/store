@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".see-more-btn").forEach(btn => {
         btn.addEventListener("click", e => {
-            const card = e.target.closest(".product-card");
+            const card = e.target.closest(".product-card") || e.target.closest(".product-item");
 
             modalImg.src = card.querySelector("img").src;
             modalTitle.textContent = card.querySelector("h4").textContent;

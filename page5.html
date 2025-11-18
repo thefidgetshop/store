@@ -40,14 +40,14 @@
             <img src="spiral.png" alt="Spiral">
             <h4>The Spiral</h4>
             <p>Endlessly smooth and balanced — a top pick for calm focus.</p>
-            <button class="see-more">See More</button>
+            <button class="see-more-btn">See More</button>
         </div>
 
         <div class="product-card">
             <img src="gearshift.png" alt="Gear Shifter">
             <h4>Gear Shifter</h4>
             <p>Our mechanical masterpiece with precision engineering.</p>
-            <button class="see-more">See More</button>
+            <button class="see-more-btn">See More</button>
         </div>
 
     </div>
@@ -57,5 +57,15 @@
     <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
 </footer>
 
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <img id="modalImage" src="" alt="Product">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
