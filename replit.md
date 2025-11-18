@@ -28,4 +28,8 @@ A static website showcasing fidget toys and products. The site features a produc
 - Modern dark theme design
 
 ## Recent Changes
+- 2025-11-18: Applied custom blue gradient theme with Inter font
+- 2025-11-18: Made hero sections on pages 3 and 5 full-screen like homepage
+- 2025-11-18: Added interactive FAQ accordion with smooth animations
+- 2025-11-18: Styled contact form with gradient buttons
 - 2025-11-18: Initial Replit environment setup

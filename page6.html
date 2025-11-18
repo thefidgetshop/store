@@ -56,9 +56,20 @@
 <script>
 document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
-        button.classList.toggle('active');
-        const answer = button.nextElementSibling;
-        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        const wasActive = button.classList.contains('active');
+        
+        // Close all other FAQs
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.classList.remove('active');
+            btn.nextElementSibling.style.maxHeight = null;
+        });
+        
+        // Toggle current FAQ
+        if (!wasActive) {
+            button.classList.add('active');
+            const answer = button.nextElementSibling;
+            answer.style.maxHeight = answer.scrollHeight + "px";
+        }
     });
 });
 </script>
