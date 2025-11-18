@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalImg = document.getElementById("modalImage");
     const modalTitle = document.getElementById("modalTitle");
     const modalDesc = document.getElementById("modalDescription");
+    const modalPrice = document.getElementById("modalPrice");
     const closeBtn = document.querySelector(".close-btn");
 
     document.querySelectorAll(".see-more-btn").forEach(btn => {
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             modalImg.src = card.querySelector("img").src;
             modalTitle.textContent = card.querySelector("h4").textContent;
             modalDesc.textContent = card.querySelector("p").textContent;
+            modalPrice.textContent = card.dataset.price || "$24.99";
 
             modal.style.display = "flex";
         });
