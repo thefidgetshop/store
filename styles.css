@@ -47,7 +47,7 @@ nav ul li a.active-link {
 /* HERO SECTION (SPOTLIGHT IMAGE) */
 .hero {
     height: 380px;
-    background-image: url('spotlight.jpg');
+    background-image: url('spotlight.png');
     background-size: cover;
     background-position: center top;
     position: relative;
