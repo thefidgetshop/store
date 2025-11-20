@@ -35,42 +35,42 @@
 
     <div class="product-grid">
 
-        <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <div class="video-card" data-video="thespiral.mp4">
             <img src="spiral.png" alt="The Spiral video">
             <h4>The Spiral in Action</h4>
             <p>See the smooth continuous motion.</p>
             <button class="watch-btn">Watch</button>
         </div>
 
-        <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <div class="video-card" data-video="gearshifter.mp4">
             <img src="gearshift.png" alt="Gear Shifter video">
             <h4>Gear Shifter Demo</h4>
             <p>Experience the mechanical clicking.</p>
             <button class="watch-btn">Watch</button>
         </div>
 
-        <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <div class="video-card" data-video="hexagon.mp4">
             <img src="hexagon.png" alt="Hexagon video">
             <h4>Hexagon Showcase</h4>
             <p>Classic design in motion.</p>
             <button class="watch-btn">Watch</button>
         </div>
 
-        <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <div class="video-card" data-video="innieoutie.mp4">
             <img src="inout.png" alt="Innie-Outie video">
             <h4>Innie-Outie Review</h4>
             <p>Push-pull mechanics demonstrated.</p>
             <button class="watch-btn">Watch</button>
         </div>
 
-        <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <div class="video-card" data-video="mattressfidget.mp4">
             <img src="mattress.png" alt="Mattress Fidget video">
             <h4>Mattress Fidget Tour</h4>
             <p>Unique texture exploration.</p>
             <button class="watch-btn">Watch</button>
         </div>
 
-        <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <div class="video-card" data-video="roryfidget.mp4">
             <img src="rory.png" alt="Rory Fidget video">
             <h4>Rory Fidget Deep Dive</h4>
             <p>Premium features explained.</p>
@@ -89,11 +89,46 @@
         <span class="close-btn" id="videoCloseBtn">&times;</span>
         <h2 id="videoTitle"></h2>
         <div class="video-wrapper">
-            <iframe id="videoFrame" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+            <video id="videoPlayer" width="100%" height="400" controls>
+                <source id="videoSource" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 </div>
 
 <script src="script.js"></script>
+<script>
+    document.querySelectorAll('.watch-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+            const card = e.target.closest('.video-card');
+            const videoModal = document.getElementById("videoModal");
+            const videoTitle = document.getElementById("videoTitle");
+            const videoPlayer = document.getElementById("videoPlayer");
+            const videoSource = document.getElementById("videoSource");
+            
+            videoTitle.textContent = card.querySelector("h4").textContent;
+            videoSource.src = card.dataset.video;
+            videoPlayer.load();
+            videoModal.style.display = "flex";
+        });
+    });
+
+    document.getElementById("videoCloseBtn").addEventListener("click", () => {
+        const videoModal = document.getElementById("videoModal");
+        const videoPlayer = document.getElementById("videoPlayer");
+        videoModal.style.display = "none";
+        videoPlayer.pause();
+    });
+
+    document.getElementById("videoModal").addEventListener("click", (e) => {
+        if (e.target.id === "videoModal") {
+            const videoModal = document.getElementById("videoModal");
+            const videoPlayer = document.getElementById("videoPlayer");
+            videoModal.style.display = "none";
+            videoPlayer.pause();
+        }
+    });
+</script>
 </body>
 </html>

@@ -35,30 +35,77 @@
         <h2>Contact Us</h2>
         <p style="text-align:center; margin-bottom:20px;">
             Have a question about your order or want to learn more about our products? 
-            Send us a message below — we’d love to hear from you!
+            Send us a message below — we'd love to hear from you!
         </p>
 
-        <form>
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+        <form id="contactForm">
+            <input type="text" name="name" id="contactName" placeholder="Your Name" required>
+            <input type="email" name="email" id="contactEmail" placeholder="Your Email" required>
+            <textarea name="message" id="contactMessage" rows="6" placeholder="Your Message" required></textarea>
             <button type="submit">Send Message</button>
         </form>
 
         <div style="margin-top:40px; text-align:center;">
             <p>Email: <strong>thefidgetshop@outlook.com</strong></p>
             <p>Phone: (Coming Soon)</p>
-            <p>Follow us:</p>
-            <p>
-                <a href="#"><i class="fab fa-instagram" style="color:#6eb5ff; margin:0 8px;"></i></a>
-                <a href="#"><i class="fab fa-facebook" style="color:#6eb5ff; margin:0 8px;"></i></a>
-                <a href="#"><i class="fab fa-twitter" style="color:#6eb5ff; margin:0 8px;"></i></a>
-            </p>
+            <p style="margin-top:20px; margin-bottom:10px;">Follow us:</p>
+            <div class="social-icons">
+                <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter">𝕏</a>
+                <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">📷</a>
+                <a href="https://www.youtube.com/watch?v=XfELJU1mRMg&t=1s" target="_blank" class="social-icon" aria-label="YouTube">▶</a>
+            </div>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
     </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            try {
+                const response = await fetch('/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+                
+                if (response.ok) {
+                    showBanner('Message sent successfully!');
+                    document.getElementById('contactForm').reset();
+                } else {
+                    showBanner('Failed to send message. Please try again.');
+                }
+            } catch (error) {
+                showBanner('Failed to send message. Please try again.');
+            }
+        });
+        
+        function showBanner(message) {
+            let banner = document.getElementById("notificationBanner");
+            if (!banner) {
+                banner = document.createElement("div");
+                banner.id = "notificationBanner";
+                banner.className = "notification-banner";
+                document.body.appendChild(banner);
+            }
+            
+            banner.textContent = message;
+            banner.classList.add("show");
+            
+            setTimeout(() => {
+                banner.classList.remove("show");
+            }, 3000);
+        }
+    </script>
 </body>
 </html>

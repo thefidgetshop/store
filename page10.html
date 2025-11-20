@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - The Fidget Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>The Fidget Shop</h1>
+        </div>
+        <div class="nav-container">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="page3.html">Our Collection</a></li>
+                    <li><a href="page4.html">All Products</a></li>
+                    <li><a href="page5.html">Our Favorites</a></li>
+                    <li><a href="page6.html">Shipping FAQ</a></li>
+                    <li><a href="page1.html">About Us</a></li>
+                    <li><a href="page2.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href="page7.html" class="cart-button">
+            <span class="cart-icon">🛒</span>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+    </header>
+
+    <main class="checkout-section">
+        <h2>Checkout</h2>
+
+        <div class="checkout-form">
+            <form id="checkoutForm">
+                <div class="form-section">
+                    <h3>Contact Information</h3>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Shipping Address</h3>
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zipCode">ZIP Code</label>
+                            <input type="text" id="zipCode" name="zipCode" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Payment Information</h3>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-summary">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Order Summary</h3>
+                    <div id="checkoutItems"></div>
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="checkoutSubtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                        <span>$5.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="checkoutTotal">$0.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="place-order-btn">Place Order</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function loadCheckout() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const checkoutItems = document.getElementById("checkoutItems");
+            
+            if (cart.length === 0) {
+                window.location.href = "page7.html";
+                return;
+            }
+            
+            let subtotal = 0;
+            checkoutItems.innerHTML = "";
+            
+            cart.forEach(item => {
+                const price = parseFloat(item.price.replace("$", ""));
+                subtotal += price;
+                
+                const itemDiv = document.createElement("div");
+                itemDiv.style.cssText = "display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color);";
+                const colorInfo = item.color && item.color !== "Default" ? ` (${item.color})` : '';
+                itemDiv.innerHTML = `
+                    <span>${item.name}${colorInfo}</span>
+                    <span>${item.price}</span>
+                `;
+                checkoutItems.appendChild(itemDiv);
+            });
+            
+            const shipping = 5.00;
+            const total = subtotal + shipping;
+            
+            document.getElementById("checkoutSubtotal").textContent = "$" + subtotal.toFixed(2);
+            document.getElementById("checkoutTotal").textContent = "$" + total.toFixed(2);
+        }
+        
+        document.getElementById("checkoutForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            localStorage.removeItem("cart");
+            
+            showBanner("Order placed successfully! Thank you for your purchase!");
+            
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2000);
+        });
+        
+        function showBanner(message) {
+            let banner = document.getElementById("notificationBanner");
+            if (!banner) {
+                banner = document.createElement("div");
+                banner.id = "notificationBanner";
+                banner.className = "notification-banner";
+                document.body.appendChild(banner);
+            }
+            
+            banner.textContent = message;
+            banner.classList.add("show");
+            
+            setTimeout(() => {
+                banner.classList.remove("show");
+            }, 3000);
+        }
+        
+        loadCheckout();
+    </script>
+</body>
+</html>

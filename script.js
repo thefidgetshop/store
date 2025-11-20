@@ -6,8 +6,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalPrice = document.getElementById("modalPrice");
     const closeBtn = document.querySelector(".close-btn");
     const addToCartBtn = document.getElementById("addToCartBtn");
+    const colorSelectorContainer = document.getElementById("colorSelectorContainer");
+    const colorSelector = document.getElementById("colorSelector");
 
     updateCartCount();
+
+    document.querySelectorAll(".color-swatch").forEach(swatch => {
+        swatch.addEventListener("click", () => {
+            document.querySelectorAll(".color-swatch").forEach(s => s.classList.remove("selected"));
+            swatch.classList.add("selected");
+            colorSelector.value = swatch.dataset.color;
+        });
+    });
 
     document.querySelectorAll(".see-more-btn").forEach(btn => {
         btn.addEventListener("click", e => {
@@ -17,6 +27,16 @@ document.addEventListener("DOMContentLoaded", () => {
             modalTitle.textContent = card.querySelector("h4").textContent;
             modalDesc.textContent = card.querySelector("p").textContent;
             modalPrice.textContent = card.dataset.price || "$4.50";
+
+            const isAccessory = card.dataset.type === "accessory" || window.location.pathname.includes("page9.html");
+            if (colorSelectorContainer) {
+                colorSelectorContainer.style.display = isAccessory ? "none" : "block";
+                if (!isAccessory) {
+                    document.querySelector(".color-swatch.selected")?.classList.remove("selected");
+                    document.querySelector(".color-swatch.beige")?.classList.add("selected");
+                    if (colorSelector) colorSelector.value = "Beige";
+                }
+            }
 
             modal.style.display = "flex";
         });
@@ -36,45 +56,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (addToCartBtn) {
         addToCartBtn.addEventListener("click", () => {
+            const colorSelector = document.getElementById("colorSelector");
+            const selectedColor = colorSelector ? colorSelector.value : "Default";
+            
             const item = {
                 name: modalTitle.textContent,
                 price: modalPrice.textContent,
-                image: modalImg.src
+                image: modalImg.src,
+                color: selectedColor
             };
             addToCart(item);
             modal.style.display = "none";
-            alert("Added to cart!");
+            showBanner("Added to Cart!");
         });
     }
 
     const videoModal = document.getElementById("videoModal");
-    const videoFrame = document.getElementById("videoFrame");
+    const videoPlayer = document.getElementById("videoPlayer");
+    const videoSource = document.getElementById("videoSource");
     const videoTitle = document.getElementById("videoTitle");
     const videoCloseBtn = document.getElementById("videoCloseBtn");
 
-    document.querySelectorAll(".watch-btn").forEach(btn => {
-        btn.addEventListener("click", e => {
-            const card = e.target.closest(".video-card");
-            videoTitle.textContent = card.querySelector("h4").textContent;
-            videoFrame.src = card.dataset.video;
-            videoModal.style.display = "flex";
+    if (videoPlayer && videoSource) {
+        document.querySelectorAll(".watch-btn").forEach(btn => {
+            btn.addEventListener("click", e => {
+                const card = e.target.closest(".video-card");
+                videoTitle.textContent = card.querySelector("h4").textContent;
+                videoSource.src = card.dataset.video;
+                videoPlayer.load();
+                videoModal.style.display = "flex";
+            });
         });
-    });
 
-    if (videoCloseBtn) {
-        videoCloseBtn.addEventListener("click", () => {
-            videoModal.style.display = "none";
-            videoFrame.src = "";
-        });
-    }
-
-    if (videoModal) {
-        videoModal.addEventListener("click", e => {
-            if (e.target === videoModal) {
+        if (videoCloseBtn) {
+            videoCloseBtn.addEventListener("click", () => {
                 videoModal.style.display = "none";
-                videoFrame.src = "";
-            }
-        });
+                videoPlayer.pause();
+                videoSource.src = "";
+            });
+        }
+
+        if (videoModal) {
+            videoModal.addEventListener("click", e => {
+                if (e.target === videoModal) {
+                    videoModal.style.display = "none";
+                    videoPlayer.pause();
+                    videoSource.src = "";
+                }
+            });
+        }
     }
 
     if (window.location.pathname.includes("page7.html")) {
@@ -121,10 +151,12 @@ function loadCart() {
 
         const itemDiv = document.createElement("div");
         itemDiv.className = "cart-item";
+        const colorInfo = item.color && item.color !== "Default" ? `<p class="cart-item-color">Color: ${item.color}</p>` : '';
         itemDiv.innerHTML = `
             <img src="${item.image}" alt="${item.name}">
             <div class="cart-item-details">
                 <h4>${item.name}</h4>
+                ${colorInfo}
                 <p class="cart-item-price">${item.price}</p>
             </div>
             <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
@@ -142,4 +174,21 @@ function removeFromCart(index) {
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
     loadCart();
+}
+
+function showBanner(message) {
+    let banner = document.getElementById("notificationBanner");
+    if (!banner) {
+        banner = document.createElement("div");
+        banner.id = "notificationBanner";
+        banner.className = "notification-banner";
+        document.body.appendChild(banner);
+    }
+    
+    banner.textContent = message;
+    banner.classList.add("show");
+    
+    setTimeout(() => {
+        banner.classList.remove("show");
+    }, 3000);
 }
