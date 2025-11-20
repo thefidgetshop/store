@@ -23,6 +23,10 @@
             </ul>
         </nav>
     </div>
+    <a href="page7.html" class="cart-button">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </a>
 </header>
 
 <section class="hero">
@@ -35,24 +39,45 @@
 <section class="product-gallery">
     <h3>Explore Our Best Designs</h3>
     <div class="card-container">
-        <div class="product-card" data-price="$24.99">
+        <div class="product-card" data-price="$4.50">
             <img src="spiral.png" alt="The Spiral fidget">
             <h4>The Spiral</h4>
             <p>Precision-engineered for endless motion and calm focus.</p>
             <button class="see-more-btn">See More</button>
         </div>
 
-        <div class="product-card" data-price="$29.99">
+        <div class="product-card" data-price="$4.50">
             <img src="gearshift.png" alt="Gear Shifter fidget">
             <h4>Gear Shifter</h4>
             <p>Experience mechanical satisfaction with every click.</p>
             <button class="see-more-btn">See More</button>
         </div>
 
-        <div class="product-card" data-price="$22.99">
+        <div class="product-card" data-price="$4.50">
             <img src="hexagon.png" alt="Hexagon fidget">
             <h4>Hexagon</h4>
             <p>Classic design. Endless layering of sensory feedback.</p>
+            <button class="see-more-btn">See More</button>
+        </div>
+
+        <div class="product-card" data-price="$4.50">
+            <img src="inout.png" alt="Innie-Outie fidget">
+            <h4>Innie-Outie</h4>
+            <p>Push and pull satisfaction in every motion.</p>
+            <button class="see-more-btn">See More</button>
+        </div>
+
+        <div class="product-card" data-price="$4.50">
+            <img src="mattress.png" alt="Mattress Fidget">
+            <h4>Mattress Fidget</h4>
+            <p>Unique texture for a calming experience.</p>
+            <button class="see-more-btn">See More</button>
+        </div>
+
+        <div class="product-card" data-price="$4.50">
+            <img src="rory.png" alt="Rory Fidget">
+            <h4>Rory Fidget</h4>
+            <p>Premium quality with smooth operation.</p>
             <button class="see-more-btn">See More</button>
         </div>
     </div>
@@ -69,7 +94,7 @@
         <h2 id="modalTitle"></h2>
         <p id="modalDescription"></p>
         <div class="modal-price" id="modalPrice"></div>
-        <button class="buy-now-btn" disabled>Buy Now (Coming Soon)</button>
+        <button class="buy-now-btn" id="addToCartBtn">Add to Cart</button>
     </div>
 </div>
 

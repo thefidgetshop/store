@@ -23,6 +23,10 @@
             </ul>
         </nav>
     </div>
+    <a href="page7.html" class="cart-button">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </a>
 </header>
 
 <section class="hero">
@@ -36,17 +40,45 @@
     <h3>Fan Favorites</h3>
     <div class="card-container">
 
-        <div class="product-card" data-price="$24.99">
+        <div class="product-card" data-price="$4.50">
             <img src="spiral.png" alt="Spiral">
             <h4>The Spiral</h4>
             <p>Endlessly smooth and balanced — a top pick for calm focus.</p>
             <button class="see-more-btn">See More</button>
         </div>
 
-        <div class="product-card" data-price="$29.99">
+        <div class="product-card" data-price="$4.50">
             <img src="gearshift.png" alt="Gear Shifter">
             <h4>Gear Shifter</h4>
             <p>Our mechanical masterpiece with precision engineering.</p>
+            <button class="see-more-btn">See More</button>
+        </div>
+
+        <div class="product-card" data-price="$4.50">
+            <img src="hexagon.png" alt="Hexagon">
+            <h4>Hexagon</h4>
+            <p>Classic favorite with endless sensory layers.</p>
+            <button class="see-more-btn">See More</button>
+        </div>
+
+        <div class="product-card" data-price="$4.50">
+            <img src="inout.png" alt="Innie-Outie">
+            <h4>Innie-Outie</h4>
+            <p>Perfectly balanced tactile satisfaction.</p>
+            <button class="see-more-btn">See More</button>
+        </div>
+
+        <div class="product-card" data-price="$4.50">
+            <img src="mattress.png" alt="Mattress Fidget">
+            <h4>Mattress Fidget</h4>
+            <p>Staff favorite with unique compression feel.</p>
+            <button class="see-more-btn">See More</button>
+        </div>
+
+        <div class="product-card" data-price="$4.50">
+            <img src="rory.png" alt="Rory Fidget">
+            <h4>Rory Fidget</h4>
+            <p>Premium choice for serious fidget enthusiasts.</p>
             <button class="see-more-btn">See More</button>
         </div>
 
@@ -64,7 +96,7 @@
         <h2 id="modalTitle"></h2>
         <p id="modalDescription"></p>
         <div class="modal-price" id="modalPrice"></div>
-        <button class="buy-now-btn" disabled>Buy Now (Coming Soon)</button>
+        <button class="buy-now-btn" id="addToCartBtn">Add to Cart</button>
     </div>
 </div>
 

@@ -25,6 +25,11 @@
                 <li><a href="page2.html">Contact</a></li>
             </ul>
         </nav>
+        
+        <a href="page7.html" class="cart-button">
+            <span class="cart-icon">🛒</span>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
     </header>
 
     <section class="hero">
@@ -38,31 +43,59 @@
         <h3>Our Curated Collection</h3>
         <div class="card-container">
 
-            <div class="product-card" data-price="$24.99">
+            <div class="product-card" data-price="$4.50">
                 <img src="spiral.png" alt="The Spiral">
                 <h4>The Spiral</h4>
                 <p>A smooth, continuous motion fidget for deep focus.</p>
                 <button class="see-more-btn">See More</button>
             </div>
 
-            <div class="product-card" data-price="$19.99">
+            <div class="product-card" data-price="$4.50">
                 <img src="inout.png" alt="Innie-Outie">
                 <h4>Innie-Outie</h4>
                 <p>Satisfying push–pull mechanics for tactile feedback.</p>
                 <button class="see-more-btn">See More</button>
             </div>
 
-            <div class="product-card" data-price="$29.99">
+            <div class="product-card" data-price="$4.50">
                 <img src="gearshift.png" alt="Gear Shifter">
                 <h4>Gear Shifter</h4>
                 <p>Mechanical clicking with adjustable resistance.</p>
                 <button class="see-more-btn">See More</button>
             </div>
 
-            <div class="product-card" data-price="$22.99">
+            <div class="product-card" data-price="$4.50">
                 <img src="hexagon.png" alt="Hexagon">
                 <h4>Hexagon</h4>
                 <p>Classic geometric fidget with extra layers.</p>
+                <button class="see-more-btn">See More</button>
+            </div>
+
+            <div class="product-card" data-price="$4.50">
+                <img src="mattress.png" alt="Mattress Fidget">
+                <h4>Mattress Fidget</h4>
+                <p>Unique texture and satisfying compression points.</p>
+                <button class="see-more-btn">See More</button>
+            </div>
+
+            <div class="product-card" data-price="$4.50">
+                <img src="rory.png" alt="Rory Fidget">
+                <h4>Rory Fidget</h4>
+                <p>Premium fidget with advanced tactile features.</p>
+                <button class="see-more-btn">See More</button>
+            </div>
+
+            <div class="product-card" data-price="$4.50">
+                <img src="spotlight.png" alt="Spotlight Fidget">
+                <h4>Spotlight Fidget</h4>
+                <p>Illuminating design with smooth action.</p>
+                <button class="see-more-btn">See More</button>
+            </div>
+
+            <div class="product-card" data-price="$4.50">
+                <img src="hexagon.png" alt="Premium Fidget">
+                <h4>Premium Fidget</h4>
+                <p>Top-tier quality for the ultimate experience.</p>
                 <button class="see-more-btn">See More</button>
             </div>
 
@@ -80,7 +113,7 @@
             <h2 id="modalTitle"></h2>
             <p id="modalDescription"></p>
             <div class="modal-price" id="modalPrice"></div>
-            <button class="buy-now-btn" disabled>Buy Now (Coming Soon)</button>
+            <button class="buy-now-btn" id="addToCartBtn">Add to Cart</button>
         </div>
     </div>
 
