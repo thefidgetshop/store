@@ -619,21 +619,24 @@ nav ul li a:hover {
 
 /* --- Cart Button --- */
 .cart-button {
-    position: relative;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 15px 25px;
     background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    border-radius: 30px;
+    border-radius: 50px;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-left: 20px;
+    z-index: 1001;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cart-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(103, 172, 255, 0.4);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(103, 172, 255, 0.5);
 }
 
 .cart-icon {
@@ -703,6 +706,13 @@ nav ul li a:hover {
 .cart-item-details h4 {
     color: var(--gradient-end);
     margin-bottom: 5px;
+}
+
+.cart-item-color {
+    font-size: 0.95em;
+    color: var(--text-subtle);
+    margin: 5px 0;
+    font-style: italic;
 }
 
 .cart-item-price {
