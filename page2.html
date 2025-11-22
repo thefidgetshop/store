@@ -58,7 +58,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
+        <p>&copy; 2025 The Fidget Shop. All rights reserved. | <a href="admin.html" style="color: var(--gradient-end); text-decoration: none;">Admin</a></p>
     </footer>
 
     <script src="script.js"></script>
@@ -71,22 +71,34 @@
             const message = document.getElementById('contactMessage').value;
             
             try {
+                const contactData = { name, email, message };
+                
+                await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(contactData)
+                });
+
                 const response = await fetch('/send-email', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ name, email, message })
+                    body: JSON.stringify(contactData)
                 });
                 
                 if (response.ok) {
                     showBanner('Message sent successfully!');
                     document.getElementById('contactForm').reset();
                 } else {
-                    showBanner('Failed to send message. Please try again.');
+                    showBanner('Message saved, but email service is currently unavailable.');
+                    document.getElementById('contactForm').reset();
                 }
             } catch (error) {
-                showBanner('Failed to send message. Please try again.');
+                showBanner('Message saved, but email service is currently unavailable.');
+                document.getElementById('contactForm').reset();
             }
         });
         

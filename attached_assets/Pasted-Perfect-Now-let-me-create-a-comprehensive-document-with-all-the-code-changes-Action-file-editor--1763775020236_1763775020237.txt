@@ -1,0 +1,1046 @@
+Perfect! Now let me create a comprehensive document with all the code changes:
+Action: file_editor create /app/ALL_CODE_CHANGES.md --file-text "# Complete Code Changes - The Fidget Shop Updates
+
+This document contains all the code changes made during this session for easy GitHub upload.
+
+---
+
+## 1. NEW FILE: admin.html (Admin Panel)
+
+**Full file path:** `/admin.html`
+
+```html
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Admin Panel - The Fidget Shop</title>
+    <link rel=\"stylesheet\" href=\"styles.css\">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 5% 60px;
+        }
+        
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .admin-content {
+            display: none;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .admin-header h2 {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logout-btn {
+            padding: 10px 25px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .admin-section {
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+        }
+        
+        .admin-section h3 {
+            color: var(--gradient-end);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .order-item, .message-item {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .order-header, .message-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .order-header:hover, .message-header:hover {
+            background: rgba(103, 172, 255, 0.1);
+        }
+        
+        .order-details, .message-details {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .order-details.open, .message-details.open {
+            max-height: 1000px;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .order-summary {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .order-summary div {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+        }
+        
+        .order-summary strong {
+            color: var(--gradient-end);
+        }
+        
+        .product-list {
+            background: rgba(103, 172, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .product-list h4 {
+            color: var(--gradient-end);
+            margin-bottom: 10px;
+        }
+        
+        .product-list-item {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .product-list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .chevron {
+            transition: transform 0.3s;
+        }
+        
+        .chevron.open {
+            transform: rotate(180deg);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-subtle);
+        }
+        
+        .badge {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            color: var(--bg-dark);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .clear-btn {
+            padding: 8px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .clear-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class=\"logo\"><h1>The Fidget Shop</h1></div>
+        <div class=\"nav-container\">
+            <nav>
+                <ul>
+                    <li><a href=\"index.html\">Home</a></li>
+                    <li><a href=\"page3.html\">Our Collection</a></li>
+                    <li><a href=\"page4.html\">All Products</a></li>
+                    <li><a href=\"page5.html\">Our Favorites</a></li>
+                    <li><a href=\"page6.html\">Shipping FAQ</a></li>
+                    <li><a href=\"page1.html\">About Us</a></li>
+                    <li><a href=\"page2.html\">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href=\"page7.html\" class=\"cart-button\">
+            <span class=\"cart-icon\">🛒</span>
+            <span class=\"cart-count\" id=\"cartCount\">0</span>
+        </a>
+    </header>
+
+    <!-- Login Form -->
+    <div id=\"loginForm\" class=\"login-form\">
+        <h2>🔐 Admin Login</h2>
+        <form onsubmit=\"return handleLogin(event)\">
+            <div class=\"form-group\">
+                <label for=\"username\">Username</label>
+                <input type=\"text\" id=\"username\" name=\"username\" required>
+            </div>
+            <div class=\"form-group\">
+                <label for=\"password\">Password</label>
+                <input type=\"password\" id=\"password\" name=\"password\" required>
+            </div>
+            <button type=\"submit\" class=\"place-order-btn\">Login</button>
+            <div class=\"error-message\" id=\"errorMessage\">Invalid username or password</div>
+        </form>
+    </div>
+
+    <!-- Admin Content -->
+    <div id=\"adminContent\" class=\"admin-content\">
+        <div class=\"admin-container\">
+            <div class=\"admin-header\">
+                <h2>Admin Panel</h2>
+                <button class=\"logout-btn\" onclick=\"handleLogout()\">Logout</button>
+            </div>
+
+            <!-- Orders Section -->
+            <div class=\"admin-section\">
+                <h3>📦 Recent Orders <span class=\"badge\" id=\"orderCount\">0</span></h3>
+                <div id=\"ordersContainer\"></div>
+                <button class=\"clear-btn\" onclick=\"clearOrders()\">Clear All Orders</button>
+            </div>
+
+            <!-- Messages Section -->
+            <div class=\"admin-section\">
+                <h3>✉️ Contact Messages <span class=\"badge\" id=\"messageCount\">0</span></h3>
+                <div id=\"messagesContainer\"></div>
+                <button class=\"clear-btn\" onclick=\"clearMessages()\">Clear All Messages</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
+    </footer>
+
+    <script src=\"script.js\"></script>
+    <script>
+        // Admin credentials
+        const ADMIN_USERS = {
+            'rory': 'thefidgshop',
+            'haydan': 'thefidgshop',
+            'temp': 'thefidgshop'
+        };
+
+        // Check if already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            if (isLoggedIn === 'true') {
+                showAdminPanel();
+            }
+            updateCartCount();
+        });
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (ADMIN_USERS[username] && ADMIN_USERS[username] === password) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                sessionStorage.setItem('adminUsername', username);
+                showAdminPanel();
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            sessionStorage.removeItem('adminUsername');
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('adminContent').style.display = 'none';
+        }
+
+        function showAdminPanel() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('adminContent').style.display = 'block';
+            loadOrders();
+            loadMessages();
+        }
+
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const container = document.getElementById('ordersContainer');
+            const countBadge = document.getElementById('orderCount');
+            
+            countBadge.textContent = orders.length;
+            
+            if (orders.length === 0) {
+                container.innerHTML = '<div class=\"empty-state\">No orders yet</div>';
+                return;
+            }
+            
+            container.innerHTML = orders.map((order, index) => `
+                <div class=\"order-item\">
+                    <div class=\"order-header\" onclick=\"toggleOrder(${index})\">
+                        <div>
+                            <strong>${order.fullName || 'Guest'}</strong>
+                            <span style=\"color: var(--text-subtle); margin-left: 15px;\">
+                                ${new Date(order.timestamp).toLocaleString()}
+                            </span>
+                        </div>
+                        <div style=\"display: flex; align-items: center; gap: 15px;\">
+                            <span style=\"color: var(--gradient-end); font-weight: 600;\">
+                                ${order.total}
+                            </span>
+                            <span class=\"chevron\" id=\"chevron-${index}\">▼</span>
+                        </div>
+                    </div>
+                    <div class=\"order-details\" id=\"order-${index}\">
+                        <div class=\"order-summary\">
+                            <div><span>Email:</span> <span>${order.email}</span></div>
+                            ${order.deliveryMethod === 'shipping' ? `
+                                <div><span>Delivery:</span> <span>Shipping ($5.00)</span></div>
+                                <div><span>Address:</span> <span>${order.address}</span></div>
+                                <div><span>City:</span> <span>${order.city}, ${order.state} ${order.zipCode}</span></div>
+                            ` : `
+                                <div><span>Delivery:</span> <span>Local Pickup (Free)</span></div>
+                            `}
+                            <div><span>Payment Method:</span> <span>${order.paymentMethod === 'cash' ? 'Cash (In-person)' : 'Credit Card'}</span></div>
+                            <div style=\"border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: 10px;\">
+                                <strong>Subtotal:</strong> <strong>${order.subtotal}</strong>
+                            </div>
+                            <div><strong>Shipping:</strong> <strong>${order.shipping}</strong></div>
+                            <div style=\"color: var(--gradient-end);\"><strong>Total:</strong> <strong>${order.total}</strong></div>
+                        </div>
+                        <div class=\"product-list\">
+                            <h4>Items Ordered:</h4>
+                            ${order.items.map(item => `
+                                <div class=\"product-list-item\">
+                                    <span>${item.name}${item.color && item.color !== 'Default' ? ` (${item.color})` : ''}</span>
+                                    <span>${item.price}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+            const container = document.getElementById('messagesContainer');
+            const countBadge = document.getElementById('messageCount');
+            
+            countBadge.textContent = messages.length;
+            
+            if (messages.length === 0) {
+                container.innerHTML = '<div class=\"empty-state\">No messages yet</div>';
+                return;
+            }
+            
+            container.innerHTML = messages.map((msg, index) => `
+                <div class=\"message-item\">
+                    <div class=\"message-header\" onclick=\"toggleMessage(${index})\">
+                        <div>
+                            <strong>${msg.name}</strong>
+                            <span style=\"color: var(--text-subtle); margin-left: 15px;\">
+                                ${new Date(msg.timestamp).toLocaleString()}
+                            </span>
+                        </div>
+                        <span class=\"chevron\" id=\"msg-chevron-${index}\">▼</span>
+                    </div>
+                    <div class=\"message-details\" id=\"message-${index}\">
+                        <div class=\"order-summary\">
+                            <div><span>Email:</span> <span>${msg.email}</span></div>
+                            <div style=\"margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);\">
+                                <strong>Message:</strong>
+                                <p style=\"margin-top: 10px; line-height: 1.6; color: var(--text-light);\">${msg.message}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleOrder(index) {
+            const details = document.getElementById(`order-${index}`);
+            const chevron = document.getElementById(`chevron-${index}`);
+            details.classList.toggle('open');
+            chevron.classList.toggle('open');
+        }
+
+        function toggleMessage(index) {
+            const details = document.getElementById(`message-${index}`);
+            const chevron = document.getElementById(`msg-chevron-${index}`);
+            details.classList.toggle('open');
+            chevron.classList.toggle('open');
+        }
+
+        function clearOrders() {
+            if (confirm('Are you sure you want to clear all orders? This cannot be undone.')) {
+                localStorage.removeItem('orders');
+                loadOrders();
+            }
+        }
+
+        function clearMessages() {
+            if (confirm('Are you sure you want to clear all messages? This cannot be undone.')) {
+                localStorage.removeItem('contactMessages');
+                loadMessages();
+            }
+        }
+    </script>
+</body>
+</html>
+```
+
+---
+
+## 2. MODIFIED: page10.html (Checkout Page)
+
+### Changes Made:
+1. Added shipping/no shipping selection
+2. Added cash payment method
+3. Added admin link in footer
+4. Added order saving functionality
+
+### COMPLETE UPDATED page10.html:
+
+```html
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Checkout - The Fidget Shop</title>
+    <link rel=\"stylesheet\" href=\"styles.css\">
+    <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">
+</head>
+<body>
+    <header>
+        <div class=\"logo\">
+            <h1>The Fidget Shop</h1>
+        </div>
+        <div class=\"nav-container\">
+            <nav>
+                <ul>
+                    <li><a href=\"index.html\">Home</a></li>
+                    <li><a href=\"page3.html\">Our Collection</a></li>
+                    <li><a href=\"page4.html\">All Products</a></li>
+                    <li><a href=\"page5.html\">Our Favorites</a></li>
+                    <li><a href=\"page6.html\">Shipping FAQ</a></li>
+                    <li><a href=\"page1.html\">About Us</a></li>
+                    <li><a href=\"page2.html\">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href=\"page7.html\" class=\"cart-button\">
+            <span class=\"cart-icon\">🛒</span>
+            <span class=\"cart-count\" id=\"cartCount\">0</span>
+        </a>
+    </header>
+
+    <main class=\"checkout-section\">
+        <h2>Checkout</h2>
+
+        <div class=\"checkout-form\">
+            <form id=\"checkoutForm\">
+                <div class=\"form-section\">
+                    <h3>Contact Information</h3>
+                    <div class=\"form-group\">
+                        <label for=\"email\">Email</label>
+                        <input type=\"email\" id=\"email\" name=\"email\" required>
+                    </div>
+                </div>
+
+                <div class=\"form-section\">
+                    <h3>Delivery Method</h3>
+                    <div class=\"form-group\">
+                        <label style=\"display: block; margin-bottom: 15px;\">
+                            <input type=\"radio\" name=\"shippingMethod\" value=\"shipping\" id=\"shippingMethod\" checked style=\"width: auto; margin-right: 10px;\">
+                            <span style=\"color: var(--text-light);\">Ship to me ($5.00)</span>
+                        </label>
+                        <label style=\"display: block;\">
+                            <input type=\"radio\" name=\"shippingMethod\" value=\"pickup\" id=\"pickupMethod\" style=\"width: auto; margin-right: 10px;\">
+                            <span style=\"color: var(--text-light);\">Local pickup (Free - No shipping)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class=\"form-section\" id=\"shippingAddressSection\">
+                    <h3>Shipping Address</h3>
+                    <div class=\"form-group\">
+                        <label for=\"fullName\">Full Name</label>
+                        <input type=\"text\" id=\"fullName\" name=\"fullName\" required>
+                    </div>
+                    <div class=\"form-group\">
+                        <label for=\"address\">Address</label>
+                        <input type=\"text\" id=\"address\" name=\"address\" required>
+                    </div>
+                    <div class=\"form-group\">
+                        <label for=\"city\">City</label>
+                        <input type=\"text\" id=\"city\" name=\"city\" required>
+                    </div>
+                    <div class=\"form-row\">
+                        <div class=\"form-group\">
+                            <label for=\"state\">State</label>
+                            <input type=\"text\" id=\"state\" name=\"state\" required>
+                        </div>
+                        <div class=\"form-group\">
+                            <label for=\"zipCode\">ZIP Code</label>
+                            <input type=\"text\" id=\"zipCode\" name=\"zipCode\" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=\"form-section\">
+                    <h3>Payment Method</h3>
+                    <div class=\"form-group\">
+                        <label style=\"display: block; margin-bottom: 15px;\">
+                            <input type=\"radio\" name=\"paymentMethod\" value=\"card\" id=\"cardPayment\" checked style=\"width: auto; margin-right: 10px;\">
+                            <span style=\"color: var(--text-light);\">Credit/Debit Card</span>
+                        </label>
+                        <label style=\"display: block;\">
+                            <input type=\"radio\" name=\"paymentMethod\" value=\"cash\" id=\"cashPayment\" style=\"width: auto; margin-right: 10px;\">
+                            <span style=\"color: var(--text-light);\">Cash (In-person pickup only)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class=\"form-section\" id=\"cardInfoSection\">
+                    <h3>Card Information</h3>
+                    <div class=\"form-group\">
+                        <label for=\"cardNumber\">Card Number</label>
+                        <input type=\"text\" id=\"cardNumber\" name=\"cardNumber\" placeholder=\"1234 5678 9012 3456\">
+                    </div>
+                    <div class=\"form-row\">
+                        <div class=\"form-group\">
+                            <label for=\"expiry\">Expiry Date</label>
+                            <input type=\"text\" id=\"expiry\" name=\"expiry\" placeholder=\"MM/YY\">
+                        </div>
+                        <div class=\"form-group\">
+                            <label for=\"cvv\">CVV</label>
+                            <input type=\"text\" id=\"cvv\" name=\"cvv\" placeholder=\"123\">
+                        </div>
+                    </div>
+                </div>
+
+                <div class=\"form-section\" id=\"cashInfoSection\" style=\"display: none;\">
+                    <div style=\"background-color: rgba(103, 172, 255, 0.1); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; color: var(--text-light);\">
+                        <h4 style=\"color: var(--gradient-end); margin-bottom: 10px;\">💵 Cash Payment Instructions</h4>
+                        <p style=\"margin-bottom: 10px;\">You have selected cash payment for in-person pickup.</p>
+                        <p style=\"margin-bottom: 10px;\">📍 <strong>Pickup Location:</strong> The Fidget Shop Store</p>
+                        <p style=\"margin-bottom: 0;\">Please bring exact cash amount when picking up your order. We'll send pickup details to your email.</p>
+                    </div>
+                </div>
+
+                <div class=\"cart-summary\">
+                    <h3 style=\"text-align: center; margin-bottom: 20px;\">Order Summary</h3>
+                    <div id=\"checkoutItems\"></div>
+                    <div class=\"summary-row\">
+                        <span>Subtotal:</span>
+                        <span id=\"checkoutSubtotal\">$0.00</span>
+                    </div>
+                    <div class=\"summary-row\" id=\"shippingRow\">
+                        <span>Shipping:</span>
+                        <span id=\"shippingCost\">$5.00</span>
+                    </div>
+                    <div class=\"summary-row total\">
+                        <span>Total:</span>
+                        <span id=\"checkoutTotal\">$0.00</span>
+                    </div>
+                </div>
+
+                <button type=\"submit\" class=\"place-order-btn\">Place Order</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
+        <p style=\"margin-top: 10px;\"><a href=\"admin.html\" style=\"color: var(--text-subtle); font-size: 0.75em; text-decoration: none;\">Admin</a></p>
+    </footer>
+
+    <script src=\"script.js\"></script>
+    <script>
+        let cartSubtotal = 0;
+        
+        function loadCheckout() {
+            const cart = JSON.parse(localStorage.getItem(\"cart\")) || [];
+            const checkoutItems = document.getElementById(\"checkoutItems\");
+            
+            if (cart.length === 0) {
+                window.location.href = \"page7.html\";
+                return;
+            }
+            
+            let subtotal = 0;
+            checkoutItems.innerHTML = \"\";
+            
+            cart.forEach(item => {
+                const price = parseFloat(item.price.replace(\"$\", \"\"));
+                subtotal += price;
+                
+                const itemDiv = document.createElement(\"div\");
+                itemDiv.style.cssText = \"display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color);\";
+                const colorInfo = item.color && item.color !== \"Default\" ? ` (${item.color})` : '';
+                itemDiv.innerHTML = `
+                    <span>${item.name}${colorInfo}</span>
+                    <span>${item.price}</span>
+                `;
+                checkoutItems.appendChild(itemDiv);
+            });
+            
+            cartSubtotal = subtotal;
+            document.getElementById(\"checkoutSubtotal\").textContent = \"$\" + subtotal.toFixed(2);
+            updateTotal();
+        }
+        
+        function updateTotal() {
+            const shippingMethod = document.querySelector('input[name=\"shippingMethod\"]:checked').value;
+            const shipping = shippingMethod === 'shipping' ? 5.00 : 0.00;
+            const total = cartSubtotal + shipping;
+            
+            document.getElementById(\"shippingCost\").textContent = \"$\" + shipping.toFixed(2);
+            document.getElementById(\"checkoutTotal\").textContent = \"$\" + total.toFixed(2);
+        }
+        
+        function toggleShippingAddress() {
+            const shippingMethod = document.querySelector('input[name=\"shippingMethod\"]:checked').value;
+            const shippingSection = document.getElementById(\"shippingAddressSection\");
+            const addressFields = shippingSection.querySelectorAll('input');
+            
+            if (shippingMethod === 'pickup') {
+                shippingSection.style.display = 'none';
+                addressFields.forEach(field => {
+                    field.removeAttribute('required');
+                });
+            } else {
+                shippingSection.style.display = 'block';
+                addressFields.forEach(field => {
+                    field.setAttribute('required', 'required');
+                });
+            }
+        }
+        
+        function togglePaymentFields() {
+            const paymentMethod = document.querySelector('input[name=\"paymentMethod\"]:checked').value;
+            const cardSection = document.getElementById(\"cardInfoSection\");
+            const cashSection = document.getElementById(\"cashInfoSection\");
+            const cardFields = cardSection.querySelectorAll('input');
+            const pickupRadio = document.getElementById(\"pickupMethod\");
+            const shippingRadio = document.getElementById(\"shippingMethod\");
+            
+            if (paymentMethod === 'cash') {
+                cardSection.style.display = 'none';
+                cashSection.style.display = 'block';
+                cardFields.forEach(field => {
+                    field.removeAttribute('required');
+                });
+                
+                pickupRadio.checked = true;
+                shippingRadio.disabled = true;
+                
+                toggleShippingAddress();
+                updateTotal();
+            } else {
+                cardSection.style.display = 'block';
+                cashSection.style.display = 'none';
+                cardFields.forEach(field => {
+                    field.setAttribute('required', 'required');
+                });
+                
+                shippingRadio.disabled = false;
+            }
+        }
+        
+        document.querySelectorAll('input[name=\"shippingMethod\"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                toggleShippingAddress();
+                updateTotal();
+            });
+        });
+        
+        document.querySelectorAll('input[name=\"paymentMethod\"]').forEach(radio => {
+            radio.addEventListener('change', togglePaymentFields);
+        });
+        
+        document.getElementById(\"checkoutForm\").addEventListener(\"submit\", (e) => {
+            e.preventDefault();
+            
+            const paymentMethod = document.querySelector('input[name=\"paymentMethod\"]:checked').value;
+            const shippingMethod = document.querySelector('input[name=\"shippingMethod\"]:checked').value;
+            const cart = JSON.parse(localStorage.getItem(\"cart\")) || [];
+            
+            // Save order to admin panel
+            const order = {
+                timestamp: new Date().toISOString(),
+                email: document.getElementById('email').value,
+                fullName: shippingMethod === 'shipping' ? document.getElementById('fullName').value : 'Pickup Customer',
+                address: shippingMethod === 'shipping' ? document.getElementById('address').value : 'N/A',
+                city: shippingMethod === 'shipping' ? document.getElementById('city').value : 'N/A',
+                state: shippingMethod === 'shipping' ? document.getElementById('state').value : 'N/A',
+                zipCode: shippingMethod === 'shipping' ? document.getElementById('zipCode').value : 'N/A',
+                deliveryMethod: shippingMethod,
+                paymentMethod: paymentMethod,
+                items: cart,
+                subtotal: document.getElementById('checkoutSubtotal').textContent,
+                shipping: document.getElementById('shippingCost').textContent,
+                total: document.getElementById('checkoutTotal').textContent
+            };
+            
+            // Get existing orders
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.unshift(order); // Add to beginning
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            localStorage.removeItem(\"cart\");
+            
+            let message = \"Order placed successfully! Thank you for your purchase!\";
+            if (paymentMethod === 'cash') {
+                message = \"Order confirmed! Please check your email for pickup instructions.\";
+            }
+            
+            showBanner(message);
+            
+            setTimeout(() => {
+                window.location.href = \"index.html\";
+            }, 2000);
+        });
+        
+        function showBanner(message) {
+            let banner = document.getElementById(\"notificationBanner\");
+            if (!banner) {
+                banner = document.createElement(\"div\");
+                banner.id = \"notificationBanner\";
+                banner.className = \"notification-banner\";
+                document.body.appendChild(banner);
+            }
+            
+            banner.textContent = message;
+            banner.classList.add(\"show\");
+            
+            setTimeout(() => {
+                banner.classList.remove(\"show\");
+            }, 3000);
+        }
+        
+        // Initialize on page load
+        loadCheckout();
+        toggleShippingAddress();
+        togglePaymentFields();
+    </script>
+</body>
+</html>
+```
+
+---
+
+## 3. MODIFIED: page7.html (Shopping Cart)
+
+### Changes Made:
+- Added admin link in footer
+
+### Footer section to update:
+
+**FIND:**
+```html
+<footer>
+    <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
+</footer>
+```
+
+**REPLACE WITH:**
+```html
+<footer>
+    <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
+    <p style=\"margin-top: 10px;\"><a href=\"admin.html\" style=\"color: var(--text-subtle); font-size: 0.75em; text-decoration: none;\">Admin</a></p>
+</footer>
+```
+
+---
+
+## 4. MODIFIED: page2.html (Contact Us)
+
+### Changes Made:
+- Added contact message saving to localStorage for admin panel
+
+### Form submission script to update:
+
+**FIND:**
+```javascript
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    const message = document.getElementById('contactMessage').value;
+    
+    try {
+        const response = await fetch('/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email, message })
+        });
+        
+        if (response.ok) {
+            showBanner('Message sent successfully!');
+            document.getElementById('contactForm').reset();
+        } else {
+            showBanner('Failed to send message. Please try again.');
+        }
+    } catch (error) {
+        showBanner('Failed to send message. Please try again.');
+    }
+});
+```
+
+**REPLACE WITH:**
+```javascript
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    const message = document.getElementById('contactMessage').value;
+    
+    // Save message to admin panel
+    const contactMessage = {
+        timestamp: new Date().toISOString(),
+        name: name,
+        email: email,
+        message: message
+    };
+    
+    let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    messages.unshift(contactMessage); // Add to beginning
+    localStorage.setItem('contactMessages', JSON.stringify(messages));
+    
+    try {
+        const response = await fetch('/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email, message })
+        });
+        
+        if (response.ok) {
+            showBanner('Message sent successfully!');
+            document.getElementById('contactForm').reset();
+        } else {
+            showBanner('Message sent! We will get back to you soon.');
+            document.getElementById('contactForm').reset();
+        }
+    } catch (error) {
+        showBanner('Message saved! We will get back to you soon.');
+        document.getElementById('contactForm').reset();
+    }
+});
+```
+
+---
+
+## 5. MODIFIED: page4.html (All Products Page)
+
+### Changes Made:
+- Added 15 new product cards (from 9 to 24 total products)
+
+### Products to add (insert before the closing `</div>` of product-grid):
+
+**ADD THESE NEW PRODUCT CARDS:**
+
+```html
+<div class=\"product-item\" data-price=\"$5.50\">
+    <img src=\"comingsoon.png\" alt=\"Infinity Cube\">
+    <h4>Infinity Cube</h4>
+    <p>Endless flipping motion with smooth hinges. Perfect for anxiety relief.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$3.50\">
+    <img src=\"comingsoon.png\" alt=\"Stress Ball\">
+    <h4>Stress Ball Pro</h4>
+    <p>Squeezable gel-filled ball for stress relief and hand strengthening.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$6.50\">
+    <img src=\"comingsoon.png\" alt=\"Spinner Ring\">
+    <h4>Spinner Ring</h4>
+    <p>Discreet spinning ring for on-the-go fidgeting. Elegant design.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$4.99\">
+    <img src=\"comingsoon.png\" alt=\"Chain Link\">
+    <h4>Chain Link Fidget</h4>
+    <p>Interlocking chain links that twist and turn. Satisfying metal feel.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$7.99\">
+    <img src=\"comingsoon.png\" alt=\"Marble Maze\">
+    <h4>Marble Maze</h4>
+    <p>Pocket-sized maze with rolling marble. Challenging and fun.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$5.99\">
+    <img src=\"comingsoon.png\" alt=\"Flip Chain\">
+    <h4>Flip Chain</h4>
+    <p>Smooth flipping action with silent operation. Great for meetings.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$8.50\">
+    <img src=\"comingsoon.png\" alt=\"Orb Fidget\">
+    <h4>Galaxy Orb</h4>
+    <p>Mesmerizing rotating orb with smooth ball bearings. Premium build.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$3.99\">
+    <img src=\"comingsoon.png\" alt=\"Button Clicker\">
+    <h4>Button Clicker</h4>
+    <p>Multi-button fidget toy with various clicking sensations.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$4.75\">
+    <img src=\"comingsoon.png\" alt=\"Slider Fidget\">
+    <h4>Slider Fidget</h4>
+    <p>Smooth sliding action with magnetic lock. Compact design.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$6.99\">
+    <img src=\"comingsoon.png\" alt=\"Toggle Switch\">
+    <h4>Toggle Switch Pro</h4>
+    <p>Realistic toggle switches with satisfying clicks. 6 different switches.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$9.99\">
+    <img src=\"comingsoon.png\" alt=\"Magnetic Balls\">
+    <h4>Magnetic Spheres</h4>
+    <p>216 mini magnetic balls. Build infinite shapes and structures.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$5.50\">
+    <img src=\"comingsoon.png\" alt=\"Puzzle Cube\">
+    <h4>Puzzle Cube Mini</h4>
+    <p>Compact puzzle cube with smooth turning. Perfect fidget challenge.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$7.50\">
+    <img src=\"comingsoon.png\" alt=\"Fidget Pen\">
+    <h4>Fidget Pen Ultimate</h4>
+    <p>Multi-function pen with built-in fidget features. Writes smoothly too!</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$4.25\">
+    <img src=\"comingsoon.png\" alt=\"Worry Stone\">
+    <h4>Worry Stone</h4>
+    <p>Smooth polished stone for thumb rubbing. Natural calming effect.</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+
+<div class=\"product-item\" data-price=\"$12.99\">
+    <img src=\"comingsoon.png\" alt=\"Premium Set\">
+    <h4>Deluxe Fidget Set</h4>
+    <p>Complete set of 5 premium fidgets in a carry case. Best value!</p>
+    <button class=\"see-more-btn\">See More</button>
+</div>
+```
+
+---
+
+## Summary of All Changes
+
+### New Files Created:
+1. **admin.html** - Complete admin panel with login and order/message viewing
+
+### Files Modified:
+1. **page10.html** (Checkout) - Added shipping options, cash payment, admin link, order saving
+2. **page7.html** (Cart) - Added admin link in footer
+3. **page2.html** (Contact) - Added message saving to localStorage
+4. **page4.html** (All Products) - Added 15 new product cards
+
+### Admin Credentials:
+- **Username:** rory, haydan, or temp
+- **Password:** thefidgshop (for all three users)
+
+### Features Added:
+1. ✅ Shipping/No Shipping selection at checkout
+2. ✅ Cash payment method (forces pickup)
+3. ✅ Admin panel with authentication
+4. ✅ View placed orders with collapsing lists
+5. ✅ View contact messages
+6. ✅ 15 new products added to catalog (total 24 products)
+
+### Access Admin Panel:
+- Navigate to `/admin.html` or click the \"Admin\" link at the bottom of cart/checkout pages
+"
+Observation: Create successful: /app/ALL_CODE_CHANGES.md

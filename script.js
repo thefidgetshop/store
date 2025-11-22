@@ -58,12 +58,15 @@ document.addEventListener("DOMContentLoaded", () => {
         addToCartBtn.addEventListener("click", () => {
             const colorSelector = document.getElementById("colorSelector");
             const selectedColor = colorSelector ? colorSelector.value : "Default";
+            const isAccessory = colorSelectorContainer && colorSelectorContainer.style.display === "none";
             
             const item = {
                 name: modalTitle.textContent,
                 price: modalPrice.textContent,
                 image: modalImg.src,
-                color: selectedColor
+                color: selectedColor,
+                type: isAccessory ? "accessory" : "fidget",
+                hasColor: !isAccessory
             };
             addToCart(item);
             modal.style.display = "none";
@@ -152,6 +155,8 @@ function loadCart() {
         const itemDiv = document.createElement("div");
         itemDiv.className = "cart-item";
         const colorInfo = item.color && item.color !== "Default" ? `<p class="cart-item-color">Color: ${item.color}</p>` : '';
+        const isAccessory = item.type === "accessory" || !item.hasColor;
+        const colorButton = isAccessory ? '' : `<button class="change-color-btn" onclick="changeCartItemColor(${index})" style="margin-right: 10px; padding: 8px 15px; background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); border: none; color: var(--bg-dark); border-radius: 20px; font-weight: 600; cursor: pointer;">Change Color</button>`;
         itemDiv.innerHTML = `
             <img src="${item.image}" alt="${item.name}">
             <div class="cart-item-details">
@@ -159,7 +164,10 @@ function loadCart() {
                 ${colorInfo}
                 <p class="cart-item-price">${item.price}</p>
             </div>
-            <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+            <div style="display: flex; gap: 10px;">
+                ${colorButton}
+                <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+            </div>
         `;
         cartItems.appendChild(itemDiv);
     });
@@ -174,6 +182,21 @@ function removeFromCart(index) {
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
     loadCart();
+}
+
+function changeCartItemColor(index) {
+    const colors = ["Beige", "Black", "Blue", "Orange", "Pink", "Purple", "Red"];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+    const currentColor = cart[index].color || "Beige";
+    const currentIndex = colors.indexOf(currentColor);
+    const nextIndex = (currentIndex + 1) % colors.length;
+    const newColor = colors[nextIndex];
+    
+    cart[index].color = newColor;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+    showBanner(`Color changed to ${newColor}!`);
 }
 
 function showBanner(message) {

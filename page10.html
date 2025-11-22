@@ -45,6 +45,20 @@
                 </div>
 
                 <div class="form-section">
+                    <h3>Delivery Method</h3>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 15px;">
+                            <input type="radio" name="shippingMethod" value="shipping" id="shippingMethod" checked style="width: auto; margin-right: 10px;">
+                            <span style="color: var(--text-light);">Ship to me ($5.00)</span>
+                        </label>
+                        <label style="display: block;">
+                            <input type="radio" name="shippingMethod" value="pickup" id="pickupMethod" style="width: auto; margin-right: 10px;">
+                            <span style="color: var(--text-light);">Local pickup (Free - No shipping)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section" id="shippingAddressSection">
                     <h3>Shipping Address</h3>
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
@@ -71,7 +85,21 @@
                 </div>
 
                 <div class="form-section">
-                    <h3>Payment Information</h3>
+                    <h3>Payment Method</h3>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 15px;">
+                            <input type="radio" name="paymentMethod" value="card" id="cardPayment" checked style="width: auto; margin-right: 10px;">
+                            <span style="color: var(--text-light);">Credit/Debit Card</span>
+                        </label>
+                        <label style="display: block;">
+                            <input type="radio" name="paymentMethod" value="cash" id="cashPayment" style="width: auto; margin-right: 10px;">
+                            <span style="color: var(--text-light);">Cash (In-person pickup only)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section" id="cardInfoSection">
+                    <h3>Card Information</h3>
                     <div class="form-group">
                         <label for="cardNumber">Card Number</label>
                         <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
@@ -97,7 +125,7 @@
                     </div>
                     <div class="summary-row">
                         <span>Shipping:</span>
-                        <span>$5.00</span>
+                        <span id="shippingCost">$5.00</span>
                     </div>
                     <div class="summary-row total">
                         <span>Total:</span>
@@ -111,11 +139,14 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 The Fidget Shop. All rights reserved.</p>
+        <p>&copy; 2025 The Fidget Shop. All rights reserved. | <a href="admin.html" style="color: var(--gradient-end); text-decoration: none;">Admin</a></p>
     </footer>
 
     <script src="script.js"></script>
     <script>
+        let currentSubtotal = 0;
+        let currentShipping = 5.00;
+
         function loadCheckout() {
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
             const checkoutItems = document.getElementById("checkoutItems");
@@ -125,12 +156,12 @@
                 return;
             }
             
-            let subtotal = 0;
+            currentSubtotal = 0;
             checkoutItems.innerHTML = "";
             
             cart.forEach(item => {
                 const price = parseFloat(item.price.replace("$", ""));
-                subtotal += price;
+                currentSubtotal += price;
                 
                 const itemDiv = document.createElement("div");
                 itemDiv.style.cssText = "display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color);";
@@ -142,23 +173,140 @@
                 checkoutItems.appendChild(itemDiv);
             });
             
-            const shipping = 5.00;
-            const total = subtotal + shipping;
-            
-            document.getElementById("checkoutSubtotal").textContent = "$" + subtotal.toFixed(2);
+            updateTotals();
+        }
+
+        function updateTotals() {
+            const total = currentSubtotal + currentShipping;
+            document.getElementById("checkoutSubtotal").textContent = "$" + currentSubtotal.toFixed(2);
+            document.getElementById("shippingCost").textContent = "$" + currentShipping.toFixed(2);
             document.getElementById("checkoutTotal").textContent = "$" + total.toFixed(2);
         }
-        
-        document.getElementById("checkoutForm").addEventListener("submit", (e) => {
+
+        document.getElementById("shippingMethod").addEventListener("change", () => {
+            document.getElementById("shippingAddressSection").style.display = "block";
+            document.getElementById("shippingMethod").disabled = false;
+            currentShipping = 5.00;
+            updateTotals();
+            updateAddressRequirements(true);
+        });
+
+        document.getElementById("pickupMethod").addEventListener("change", () => {
+            const cashPayment = document.getElementById("cashPayment").checked;
+            if (!cashPayment) {
+                document.getElementById("shippingAddressSection").style.display = "none";
+            }
+            currentShipping = 0;
+            updateTotals();
+            updateAddressRequirements(false);
+        });
+
+        document.getElementById("cardPayment").addEventListener("change", () => {
+            document.getElementById("cardInfoSection").style.display = "block";
+            document.getElementById("shippingMethod").disabled = false;
+            document.getElementById("pickupMethod").disabled = false;
+            updateCardRequirements(true);
+        });
+
+        document.getElementById("cashPayment").addEventListener("change", () => {
+            document.getElementById("cardInfoSection").style.display = "none";
+            document.getElementById("pickupMethod").checked = true;
+            document.getElementById("shippingMethod").disabled = true;
+            document.getElementById("pickupMethod").disabled = false;
+            document.getElementById("shippingAddressSection").style.display = "none";
+            currentShipping = 0;
+            updateTotals();
+            updateAddressRequirements(false);
+            updateCardRequirements(false);
+        });
+
+        function updateAddressRequirements(required) {
+            const fullName = document.getElementById("fullName");
+            const address = document.getElementById("address");
+            const city = document.getElementById("city");
+            const state = document.getElementById("state");
+            const zipCode = document.getElementById("zipCode");
+            
+            fullName.required = required;
+            address.required = required;
+            city.required = required;
+            state.required = required;
+            zipCode.required = required;
+            
+            if (!required) {
+                fullName.value = '';
+                address.value = '';
+                city.value = '';
+                state.value = '';
+                zipCode.value = '';
+            }
+        }
+
+        function updateCardRequirements(required) {
+            const cardNumber = document.getElementById("cardNumber");
+            const expiry = document.getElementById("expiry");
+            const cvv = document.getElementById("cvv");
+            
+            cardNumber.required = required;
+            expiry.required = required;
+            cvv.required = required;
+            
+            if (!required) {
+                cardNumber.value = '';
+                expiry.value = '';
+                cvv.value = '';
+            }
+        }
+
+        document.getElementById("checkoutForm").addEventListener("submit", async (e) => {
             e.preventDefault();
             
-            localStorage.removeItem("cart");
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const deliveryMethod = document.querySelector('input[name="shippingMethod"]:checked').value;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
             
-            showBanner("Order placed successfully! Thank you for your purchase!");
-            
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 2000);
+            if (paymentMethod === 'cash' && deliveryMethod === 'shipping') {
+                showBanner("Cash payment is only available for local pickup!");
+                return;
+            }
+
+            const orderData = {
+                fullName: document.getElementById("fullName").value || null,
+                email: document.getElementById("email").value,
+                address: document.getElementById("address").value || null,
+                city: document.getElementById("city").value || null,
+                state: document.getElementById("state").value || null,
+                zipCode: document.getElementById("zipCode").value || null,
+                deliveryMethod: deliveryMethod,
+                paymentMethod: paymentMethod,
+                subtotal: "$" + currentSubtotal.toFixed(2),
+                shipping: "$" + currentShipping.toFixed(2),
+                total: "$" + (currentSubtotal + currentShipping).toFixed(2),
+                items: cart
+            };
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                if (response.ok) {
+                    localStorage.removeItem("cart");
+                    showBanner("Order placed successfully! Thank you for your purchase!");
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 2000);
+                } else {
+                    showBanner("Error placing order. Please try again.");
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showBanner("Error placing order. Please try again.");
+            }
         });
         
         function showBanner(message) {
